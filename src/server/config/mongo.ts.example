@@ -1,0 +1,1 @@
+export const mongodbURI = "mongodb+srv://<<username>>:<<password>>@cm-cluster.1khfimy.mongodb.net/";

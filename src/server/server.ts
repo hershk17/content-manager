@@ -1,6 +1,6 @@
 import express from "express";
 import { connect } from "mongoose";
-import { mongodbURI as db } from "./config/keys";
+import { mongodbURI as db } from "./config/mongo";
 import test from "./routes/api/test";
 import bodyParser from "body-parser";
 import cors from "cors";
