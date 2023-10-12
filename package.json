@@ -4,9 +4,9 @@
   "description": "W.I.P",
   "main": "index.ts",
   "scripts": {
-    "start": "cd src/server && npm run dev && cd ../client && npm start",
-    "client": "cd src/client && npm start",
-    "server": "cd src/server && npm run dev"
+    "start:client": "cd src/client && npm run dev",
+    "start:server": "cd src/server && npm run dev",
+    "start": "concurrently \"npm run start:client\" \"npm run start:server\""
   },
   "keywords": [],
   "author": "Harsh Keswani",
@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/hershk17/content-manager/issues"
   },
-  "homepage": "https://github.com/hershk17/content-manager/issues#readme"
+  "homepage": "https://github.com/hershk17/content-manager/issues#readme",
+  "dependencies": {
+    "concurrently": "^8.2.1"
+  }
 }
