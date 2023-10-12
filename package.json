@@ -1,0 +1,22 @@
+{
+  "name": "content-manager",
+  "version": "1.0.0",
+  "description": "W.I.P",
+  "main": "index.ts",
+  "scripts": {
+    "start": "cd src/server && npm run dev && cd ../client && npm start",
+    "client": "cd src/client && npm start",
+    "server": "cd src/server && npm run dev"
+  },
+  "keywords": [],
+  "author": "Harsh Keswani",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hershk17/content-manager.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hershk17/content-manager/issues"
+  },
+  "homepage": "https://github.com/hershk17/content-manager/issues#readme"
+}
