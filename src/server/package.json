@@ -4,8 +4,8 @@
   "description": "",
   "main": "server.ts",
   "scripts": {
-    "start": "NODE_ENV=production ts-node ./server.ts",
-    "dev": "NODE_ENV=development ts-node-dev ./server.ts",
+    "start": "NODE_ENV=production ts-node ./src/server.ts",
+    "dev": "NODE_ENV=development npx nodemon ./src/server.ts",
     "build": "NODE_ENV=production npx tsc"
   },
   "keywords": [],
@@ -31,6 +31,6 @@
   },
   "nodemonConfig": {
     "ext": "ts",
-    "exec": "ts-node ./server.ts"
+    "exec": "ts-node ./src/server.ts"
   }
 }
