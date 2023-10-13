@@ -1,1 +1,0 @@
-export const mongodbURI = "mongodb+srv://hershk17:DOTmidbnpfcm7aZh@cm-cluster.mp9ogrv.mongodb.net/";
