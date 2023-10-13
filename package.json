@@ -4,9 +4,9 @@
   "description": "W.I.P",
   "main": "index.ts",
   "scripts": {
-    "start:client": "cd src/client && npm run dev",
-    "start:server": "cd src/server && npm run dev",
-    "start": "concurrently \"npm run start:client\" \"npm run start:server\""
+    "fe": "cd src/client && npm run dev",
+    "be": "cd src/server && npm run dev",
+    "start": "concurrently \"npm run fe\" \"npm run be\""
   },
   "keywords": [],
   "author": "Harsh Keswani",
