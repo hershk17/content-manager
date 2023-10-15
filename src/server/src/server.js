@@ -3,6 +3,8 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import dotenv from "dotenv";
 
+import authRouter from "./routes/auth.routes";
+
 dotenv.config();
 
 const app = express();
@@ -11,7 +13,9 @@ app.use(cors({ origin: "*" }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get("/", (req, res) => {
+app.use("/api/auth", authRouter);
+
+app.get("/api/", (req, res) => {
   res.json({ message: "Welcome to my test application." });
 });
 

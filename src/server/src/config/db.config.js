@@ -4,9 +4,11 @@ const { Pool } = pg;
 const credentials = {
   user: "postgres",
   host: "localhost",
-  database: "db-name-goes-here",
+  database: "content-manager",
   password: process.env.PG_PASSWORD,
   port: 5432,
 };
 
 const pool = new Pool(credentials);
+
+export default pool;
