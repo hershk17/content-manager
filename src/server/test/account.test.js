@@ -8,8 +8,8 @@ import bcrypt from "bcrypt";
 import * as dotenv from "dotenv";
 
 import authRouter from "../src/routes/auth.routes.js";
-import AccountModel from "../src/models/account.model";
-import AccountController from "../src/controllers/account.controller";
+import AccountModel from "../src/models/account.model.js";
+import AccountController from "../src/controllers/account.controller.js";
 
 let server = null;
 let pool = null;
@@ -130,7 +130,6 @@ describe("Account Controller", () => {
       };
 
       const response = await request(app).post("/auth/signup").send(body);
-      console.log(response.text);
       expect(response.header["content-type"]).toBe("text/html; charset=utf-8");
       expect(response.statusCode).toBe(400);
       expect(response.text).toEqual("Missing email");

@@ -2,7 +2,6 @@
   "name": "content-manager",
   "version": "1.0.0",
   "description": "W.I.P",
-  "main": "index.ts",
   "scripts": {
     "fe": "cd src/client && npm run dev",
     "be": "cd src/server && npm run dev",

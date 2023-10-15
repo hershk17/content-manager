@@ -58,7 +58,7 @@ class AccountController {
     // store in cookie
     let cookieOptions = {
       expires: new Date(Date.now() + 3600 * 24),
-      secure: process.env.ENVIRONMENT == "Local" ? false : true,
+      secure: process.env.NODE_ENV == "Local" ? false : true,
       httpOnly: true,
       sameSite: "Lax",
     };

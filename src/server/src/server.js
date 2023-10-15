@@ -1,11 +1,7 @@
-import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
-import dotenv from "dotenv";
-
-import authRouter from "./routes/auth.routes";
-
-dotenv.config();
+import express from "express";
+import authRouter from "./routes/auth.routes.js";
 
 const app = express();
 
@@ -19,5 +15,5 @@ app.get("/api/", (req, res) => {
   res.json({ message: "Welcome to my test application." });
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.NODE_PORT || 3000;
 app.listen(PORT, () => console.log(`The server is running on port ${PORT}`));
