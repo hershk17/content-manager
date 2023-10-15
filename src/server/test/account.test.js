@@ -308,14 +308,14 @@ describe("Account Controller", () => {
 
     test("returns response succesfully", async () => {
       let body = {
-        email: "chris@chrisgrime.com",
+        email: "test2@test2.com",
         password: "test",
       };
 
       pool.query.mockResolvedValue({
         rows: [
           {
-            email: "chris@chrisgrime.com",
+            email: "test2@test2.com",
             password: await bcrypt.hash("test", 10),
           },
         ],
