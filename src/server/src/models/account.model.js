@@ -11,7 +11,7 @@ class Account {
     // check to make sure an account with the same email doesnt exist
     let emails = await pool.query("SELECT * FROM account WHERE email = $1;", [payload.email]);
     if (emails.rows.length) {
-      return new Error("Email already exists");
+      throw new Error("Email already exists");
     }
 
     // insert new account into the db
