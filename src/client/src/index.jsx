@@ -9,10 +9,6 @@ import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } 
 import ErrorPage from "./error-page";
 import "./index.css";
 import Home from "./routes/home";
-import { ApolloClient, InMemoryCache } from "@apollo/client";
-import { ApolloProvider } from "@apollo/client/react";
-
-const client = new ApolloClient({ uri: "http://localhost:3000/graphql", cache: new InMemoryCache() });
 
 const router = createBrowserRouter(
   createRoutesFromElements(<Route path="/" element={<Home />} errorElement={<ErrorPage />}></Route>)
@@ -20,9 +16,7 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <ApolloProvider client={client}>
-      <CssBaseline enableColorScheme />
-      <RouterProvider router={router} />
-    </ApolloProvider>
+    <CssBaseline enableColorScheme />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
