@@ -8,10 +8,10 @@ import * as ReactDOM from "react-dom/client";
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom";
 import ErrorPage from "./error-page";
 import "./index.css";
-import Home from "./routes/home";
+import Login from "./routes/Login";
 
 const router = createBrowserRouter(
-  createRoutesFromElements(<Route path="/" element={<Home />} errorElement={<ErrorPage />}></Route>)
+  createRoutesFromElements(<Route path="/" element={<Login />} errorElement={<ErrorPage />}></Route>)
 );
 
 ReactDOM.createRoot(document.getElementById("root")).render(
