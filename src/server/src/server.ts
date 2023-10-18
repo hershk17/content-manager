@@ -8,15 +8,14 @@ import { readFileSync } from "fs";
 import https from "https";
 import mongoose from "mongoose";
 import passport from "passport";
-import authRoutes from "./routes/auth";
+import routes from "./routes";
 
-import "./services/facebookStrategy";
-import "./services/googleStrategy";
-import "./services/jwtStrategy";
-import "./services/localStrategy";
+import "./services/auth/facebookStrategy";
+import "./services/auth/googleStrategy";
+import "./services/auth/jwtStrategy";
+import "./services/auth/localStrategy";
 
-import { dirname, resolve } from "path";
-import { fileURLToPath } from "url";
+import { resolve } from "path";
 // const __filename = fileURLToPath(import.meta.url);
 // const __dirname = dirname(__filename);
 
@@ -46,7 +45,7 @@ mongoose
   .catch((err) => console.log(err));
 
 // Routes
-app.use("/auth", authRoutes);
+app.use("/", routes);
 
 // Server
 if (isProduction) {

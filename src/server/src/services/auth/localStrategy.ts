@@ -1,7 +1,7 @@
 import passport from "passport";
 import { Strategy as PassportLocalStrategy } from "passport-local";
-import User from "../models/user.model";
-import { loginSchema } from "./validators";
+import User from "../../models/user";
+import { loginSchema } from "../validators";
 
 const passportLogin = new PassportLocalStrategy(
   {

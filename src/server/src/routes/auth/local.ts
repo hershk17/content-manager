@@ -1,7 +1,7 @@
 import { faker } from "@faker-js/faker";
 import { Router } from "express";
 import { requireLocalAuth } from "../../middleware/requireAuth";
-import User from "../../models/user.model";
+import User from "../../models/user";
 import { registerSchema } from "../../services/validators";
 
 const router = Router();

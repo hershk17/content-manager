@@ -1,15 +1,9 @@
 import bcrypt from "bcrypt";
 import fs from "fs";
-import Joi from "joi";
 import jwt from "jsonwebtoken";
-import mongoose, { Schema, Document } from "mongoose";
+import mongoose, { Document, Schema } from "mongoose";
 import { join } from "path";
 import { isValidUrl } from "../services/validators";
-// import { fileURLToPath } from "url";
-// import { dirname } from "path";
-
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = dirname(__filename);
 
 const isProduction = process.env.NODE_ENV === "production";
 const secretOrKey = isProduction ? process.env.JWT_SECRET_PROD : process.env.JWT_SECRET_DEV;

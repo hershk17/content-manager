@@ -1,6 +1,6 @@
 import passport from "passport";
 import { Strategy as FacebookStrategy } from "passport-facebook";
-import User from "../models/user.model";
+import User from "../../models/user";
 
 const serverUrl = process.env.NODE_ENV === "production" ? process.env.SERVER_URL_PROD : process.env.SERVER_URL_DEV;
 
