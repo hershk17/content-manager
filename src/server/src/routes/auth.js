@@ -2,7 +2,7 @@ import { faker } from "@faker-js/faker";
 import { Router } from "express";
 import Joi from "joi";
 import passport from "passport";
-import requireLocalAuth from "../middleware/requireAuth.js";
+import {requireLocalAuth} from "../middleware/requireAuth.js";
 import User from "../models/User.model.js";
 import { registerSchema } from "../services/validators.js";
 
