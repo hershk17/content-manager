@@ -1,8 +1,7 @@
-import Joi from "joi";
 import passport from "passport";
 import { Strategy as PassportLocalStrategy } from "passport-local";
-import User from "../models/User.model.js";
-import { loginSchema } from "./validators.js";
+import User from "../models/user.model";
+import { loginSchema } from "./validators";
 
 const passportLogin = new PassportLocalStrategy(
   {
@@ -12,7 +11,7 @@ const passportLogin = new PassportLocalStrategy(
     passReqToCallback: true,
   },
   async (req, email, password, done) => {
-    const { error } = Joi.validate(req.body, loginSchema);
+    const { error } = loginSchema.validate(req.body);
     if (error) {
       return done(null, false, { message: error.details[0].message });
     }
@@ -23,7 +22,7 @@ const passportLogin = new PassportLocalStrategy(
         return done(null, false, { message: "Email does not exists." });
       }
 
-      user.comparePassword(password, function (err, isMatch) {
+      user.comparePassword(password, function (err: Error, isMatch: boolean) {
         if (err) {
           return done(err);
         }

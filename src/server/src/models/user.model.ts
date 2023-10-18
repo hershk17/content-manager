@@ -1,20 +1,41 @@
-import dotenv from "dotenv";
-dotenv.config();
-
 import bcrypt from "bcrypt";
 import fs from "fs";
 import Joi from "joi";
 import jwt from "jsonwebtoken";
-import mongoose from "mongoose";
+import mongoose, { Schema, Document } from "mongoose";
 import { join } from "path";
-import { Schema } from "mongoose";
-import { fileURLToPath } from "url";
-import { dirname } from "path";
+import { isValidUrl } from "../services/validators";
+// import { fileURLToPath } from "url";
+// import { dirname } from "path";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = dirname(__filename);
 
-const userSchema = new Schema(
+const isProduction = process.env.NODE_ENV === "production";
+const secretOrKey = isProduction ? process.env.JWT_SECRET_PROD : process.env.JWT_SECRET_DEV;
+const IMAGES_FOLDER_PATH = "/public/images/";
+
+interface IUser {
+  provider?: string;
+  username?: string;
+  email?: string;
+  password?: string;
+  name?: string;
+  avatar?: string;
+  role?: string;
+  bio?: string;
+  googleId?: string;
+  facebookId?: string;
+}
+
+interface IUserDocument extends IUser, Document {
+  toJSON(): any;
+  generateJWT(): any;
+  registerUser(newUser: any, callback: Function): any;
+  comparePassword(candidatePassword: string, callback: Function): any;
+}
+
+const userSchema: Schema<IUserDocument> = new Schema(
   {
     provider: {
       type: String,
@@ -58,7 +79,6 @@ const userSchema = new Schema(
       unique: true,
       sparse: true,
     },
-    messages: [{ type: mongoose.Schema.Types.ObjectId, ref: "Message" }],
   },
   { timestamps: true }
 );
@@ -87,23 +107,20 @@ userSchema.methods.toJSON = function () {
   };
 };
 
-const isProduction = process.env.NODE_ENV === "production";
-const secretOrKey = isProduction ? process.env.JWT_SECRET_PROD : process.env.JWT_SECRET_DEV;
-
 userSchema.methods.generateJWT = function () {
   const token = jwt.sign(
     {
-      expiresIn: "12h",
+      expiresIn: "24h",
       id: this._id,
       provider: this.provider,
       email: this.email,
     },
-    secretOrKey
+    secretOrKey!
   );
   return token;
 };
 
-userSchema.methods.registerUser = (newUser, callback) => {
+userSchema.methods.registerUser = function (newUser: any, callback: Function) {
   bcrypt.genSalt(10, (err, salt) => {
     bcrypt.hash(newUser.password, salt, (errh, hash) => {
       if (err) {
@@ -116,43 +133,39 @@ userSchema.methods.registerUser = (newUser, callback) => {
   });
 };
 
-userSchema.methods.comparePassword = function (candidatePassword, callback) {
+userSchema.methods.comparePassword = function (candidatePassword: string, callback: Function) {
   bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
     if (err) return callback(err);
     callback(null, isMatch);
   });
 };
 
-// const delay = (t, ...vs) => new Promise(r => setTimeout(r, t, ...vs)) or util.promisify(setTimeout)
+export default mongoose.model("User", userSchema);
 
-export async function hashPassword(password) {
-  const saltRounds = 10;
+// export async function hashPassword(password: string) {
+//   const saltRounds = 10;
 
-  const hashedPassword = await new Promise((resolve, reject) => {
-    bcrypt.hash(password, saltRounds, function (err, hash) {
-      if (err) reject(err);
-      else resolve(hash);
-    });
-  });
+//   const hashedPassword = await new Promise((resolve, reject) => {
+//     bcrypt.hash(password, saltRounds, function (err, hash) {
+//       if (err) reject(err);
+//       else resolve(hash);
+//     });
+//   });
 
-  return hashedPassword;
-}
+//   return hashedPassword;
+// }
 
-export const validateUser = (user) => {
-  const schema = {
-    avatar: Joi.any(),
-    name: Joi.string().min(2).max(30).required(),
-    username: Joi.string()
-      .min(2)
-      .max(20)
-      .regex(/^[a-zA-Z0-9_]+$/)
-      .required(),
-    password: Joi.string().min(6).max(20).allow("").allow(null),
-  };
+// export const validateUser = (user: any) => {
+//   const schema = {
+//     avatar: Joi.any(),
+//     name: Joi.string().min(2).max(30).required(),
+//     username: Joi.string()
+//       .min(2)
+//       .max(20)
+//       .regex(/^[a-zA-Z0-9_]+$/)
+//       .required(),
+//     password: Joi.string().min(6).max(20).allow("").allow(null),
+//   };
 
-  return Joi.validate(user, schema);
-};
-
-const User = mongoose.model("User", userSchema);
-
-export default User;
+//   return schema.validate(user);
+// };

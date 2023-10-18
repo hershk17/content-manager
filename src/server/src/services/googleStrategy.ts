@@ -1,23 +1,20 @@
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
-import User from "../models/User.model.js";
-import dotenv from "dotenv";
-dotenv.config();
+import User from "../models/user.model";
 
 const serverUrl = process.env.NODE_ENV === "production" ? process.env.SERVER_URL_PROD : process.env.SERVER_URL_DEV;
 
-console.log(process.env.GOOGLE_CLIENT_ID);
-
-// google strategy
 const googleLogin = new GoogleStrategy(
   {
-    clientID: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    clientID: process.env.GOOGLE_CLIENT_ID!,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     callbackURL: `${serverUrl}${process.env.GOOGLE_CALLBACK_URL}`,
     proxy: true,
   },
-  async (accessToken, refreshToken, userData, done) => {
+  async (_accessToken, _refreshToken, userData, done) => {
     const profile = userData._json;
+    console.log(userData);
+    console.log(profile);
     try {
       const oldUser = await User.findOne({ email: profile.email });
 
@@ -28,13 +25,14 @@ const googleLogin = new GoogleStrategy(
       console.log(err);
     }
 
+    // register user
     try {
       const newUser = await new User({
         provider: "google",
-        googleId: profile.id,
-        username: `user${profile.id}`,
+        googleId: userData.id,
+        username: `user${userData.id}`,
         email: profile.email,
-        name: profile.displayName,
+        name: userData.displayName,
         avatar: profile.picture,
       }).save();
 

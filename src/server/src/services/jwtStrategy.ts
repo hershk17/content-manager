@@ -1,9 +1,6 @@
 import passport from "passport";
 import { ExtractJwt, Strategy as JwtStrategy } from "passport-jwt";
-import User from "../models/User.model.js";
-import dotenv from "dotenv";
-dotenv.config();
-console.log(process.env.JWT_SECRET_DEV);
+import User from "../models/user.model";
 
 const isProduction = process.env.NODE_ENV === "production";
 const secretOrKey = isProduction ? process.env.JWT_SECRET_PROD : process.env.JWT_SECRET_DEV;

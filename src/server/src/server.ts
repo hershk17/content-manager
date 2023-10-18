@@ -8,18 +8,17 @@ import { readFileSync } from "fs";
 import https from "https";
 import mongoose from "mongoose";
 import passport from "passport";
+import authRoutes from "./routes/auth";
+
+import "./services/facebookStrategy";
+import "./services/googleStrategy";
+import "./services/jwtStrategy";
+import "./services/localStrategy";
+
 import { dirname, resolve } from "path";
 import { fileURLToPath } from "url";
-import testRoutes from "./routes/test.js";
-import authRoutes from "./routes/auth.js"
-
-// import "./services/facebookStrategy.js";
-import "./services/googleStrategy.js";
-import "./services/jwtStrategy.js";
-import "./services/localStrategy.js";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = dirname(__filename);
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -39,10 +38,7 @@ const dbConnection = isProduction ? process.env.MONGO_URI_PROD : process.env.MON
 
 // DB Connection
 mongoose
-  .connect(dbConnection, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(dbConnection!)
   .then(() => {
     console.log("MongoDB Connected...");
     // seedDb();
@@ -50,7 +46,6 @@ mongoose
   .catch((err) => console.log(err));
 
 // Routes
-app.use("/", testRoutes);
 app.use("/auth", authRoutes);
 
 // Server

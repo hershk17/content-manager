@@ -2,8 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "description": "W.I.P",
-  "main": "./src/server.js",
-  "type": "module",
+  "main": "./src/server.ts",
   "scripts": {
     "start": "NODE_ENV=production nodemon",
     "dev": "NODE_ENV=development nodemon",
@@ -38,9 +37,26 @@
     "passport-jwt": "^4.0.1",
     "passport-local": "^1.0.0",
     "supertest": "^6.3.3",
-    "ts-node": "^10.9.1"
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.1",
+    "@types/cors": "^2.8.15",
+    "@types/express": "^4.17.20",
+    "@types/jsonwebtoken": "^9.0.4",
+    "@types/passport": "^1.0.14",
+    "@types/passport-facebook": "^3.0.2",
+    "@types/passport-google-oauth20": "^2.0.13",
+    "@types/passport-jwt": "^3.0.11",
+    "@types/passport-local": "^1.0.37",
     "nodemon": "^3.0.1"
+  },
+  "nodemonConfig": {
+    "watch": [
+      "src"
+    ],
+    "ext": "ts",
+    "exec": "ts-node src/server.ts"
   }
 }
