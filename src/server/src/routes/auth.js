@@ -1,12 +1,15 @@
 import { faker } from "@faker-js/faker";
 import { Router } from "express";
 import Joi from "joi";
-import requireLocalAuth from "../../middleware/requireLocalAuth.js";
-import User from "../../models/User.model.js";
-import { registerSchema } from "../../services/validators.js";
+import passport from "passport";
+import requireLocalAuth from "../middleware/requireAuth.js";
+import User from "../models/User.model.js";
+import { registerSchema } from "../services/validators.js";
 
 const router = Router();
+const clientUrl = process.env.NODE_ENV === "production" ? process.env.CLIENT_URL_PROD : process.env.CLIENT_URL_DEV;
 
+// routes for local auth
 router.post("/login", requireLocalAuth, (req, res) => {
   const token = req.user.generateJWT();
   const me = req.user.toJSON();
@@ -49,6 +52,43 @@ router.post("/register", async (req, res, next) => {
     return next(err);
   }
 });
+
+// routes for google auth
+router.get(
+  "/google",
+  passport.authenticate("google", {
+    scope: ["profile", "email"],
+  })
+);
+router.get(
+  "/google/callback",
+  passport.authenticate("google", { failureRedirect: "/", session: false }),
+  (req, res) => {
+    const token = req.user.generateJWT();
+    res.cookie("x-auth-cookie", token);
+    res.redirect(clientUrl);
+  }
+);
+
+// routes for facebook auth
+router.get(
+  "/facebook",
+  passport.authenticate("facebook", {
+    scope: ["public_profile", "email"],
+  })
+);
+router.get(
+  "/facebook/callback",
+  passport.authenticate("facebook", {
+    failureRedirect: "/",
+    session: false,
+  }),
+  (req, res) => {
+    const token = req.user.generateJWT();
+    res.cookie("x-auth-cookie", token);
+    res.redirect(clientUrl);
+  }
+);
 
 // logout
 router.get("/logout", (req, res) => {

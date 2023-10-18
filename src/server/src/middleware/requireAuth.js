@@ -1,6 +1,8 @@
 import passport from "passport";
 
-const requireLocalAuth = (req, res, next) => {
+export const requireJwtAuth = passport.authenticate("jwt", { session: false });
+
+export const requireLocalAuth = (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
     if (err) {
       return next(err);
@@ -12,5 +14,3 @@ const requireLocalAuth = (req, res, next) => {
     next();
   })(req, res, next);
 };
-
-export default requireLocalAuth;

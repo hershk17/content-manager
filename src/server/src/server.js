@@ -10,7 +10,8 @@ import mongoose from "mongoose";
 import passport from "passport";
 import { dirname, resolve } from "path";
 import { fileURLToPath } from "url";
-import routes from "./routes/index.js";
+import testRoutes from "./routes/test.js";
+import authRoutes from "./routes/auth.js"
 
 // import "./services/facebookStrategy.js";
 import "./services/googleStrategy.js";
@@ -49,7 +50,8 @@ mongoose
   .catch((err) => console.log(err));
 
 // Routes
-app.use("/", routes);
+app.use("/", testRoutes);
+app.use("/auth", authRoutes);
 
 // Server
 if (isProduction) {
