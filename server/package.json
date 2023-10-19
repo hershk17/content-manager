@@ -1,0 +1,60 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "W.I.P",
+  "main": "./src/server.ts",
+  "scripts": {
+    "start": "NODE_ENV=production nodemon",
+    "dev": "NODE_ENV=development nodemon",
+    "test": "jest --detectOpenHandles",
+    "build": "tsc -p"
+  },
+  "keywords": [],
+  "author": "Harsh Keswani",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.23.2",
+    "@babel/plugin-transform-modules-commonjs": "^7.23.0",
+    "@faker-js/faker": "^8.2.0",
+    "babel-jest": "^29.7.0",
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "config": "^3.3.9",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "eslint": "^8.51.0",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "jest": "^29.7.0",
+    "joi": "^17.11.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^7.6.2",
+    "morgan": "^1.10.0",
+    "passport": "^0.6.0",
+    "passport-github2": "^0.1.12",
+    "passport-google-oauth20": "^2.0.0",
+    "passport-jwt": "^4.0.1",
+    "passport-local": "^1.0.0",
+    "supertest": "^6.3.3",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.1",
+    "@types/cors": "^2.8.15",
+    "@types/express": "^4.17.20",
+    "@types/jsonwebtoken": "^9.0.4",
+    "@types/passport": "^1.0.14",
+    "@types/passport-google-oauth20": "^2.0.13",
+    "@types/passport-jwt": "^3.0.11",
+    "@types/passport-local": "^1.0.37",
+    "nodemon": "^3.0.1"
+  },
+  "nodemonConfig": {
+    "watch": [
+      "src"
+    ],
+    "ext": "ts",
+    "exec": "ts-node src/server.ts"
+  }
+}
