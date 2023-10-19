@@ -2,10 +2,15 @@
   "name": "content-manager",
   "version": "1.0.0",
   "description": "W.I.P",
+  "main": "server/src/server.ts",
   "scripts": {
-    "fe": "cd src/client && npm run dev",
-    "be": "cd src/server && npm run dev",
-    "start": "concurrently \"npm run fe\" \"npm run be\""
+    "fe": "cd client && npm run dev",
+    "be": "cd server && npm run dev",
+    "start": "concurrently \"npm run fe\" \"npm run be\"",
+    "docker:prod:client:build": "docker compose build cm-client",
+    "docker:prod:server:build": "docker compose build cm-server",
+    "docker:prod:client:push": "docker push hershk17/content-manager-client:latest",
+    "docker:prod:server:push": "docker push hershk17/content-manager-server:latest"
   },
   "keywords": [],
   "author": "Harsh Keswani",

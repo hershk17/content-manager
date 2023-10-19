@@ -35,10 +35,7 @@ const dbConnection = isProduction ? process.env.MONGO_URI_PROD : process.env.MON
 // DB Connection
 mongoose
   .connect(dbConnection!)
-  .then(() => {
-    console.log("MongoDB Connected...");
-    // seedDb();
-  })
+  .then(() => console.log("MongoDB Connected..."))
   .catch((err) => console.log(err));
 
 // Routes
