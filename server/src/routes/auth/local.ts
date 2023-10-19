@@ -5,12 +5,11 @@ import User, { IUserDocument } from "../../models/user";
 import { registerSchema } from "../../services/validators";
 
 const router = Router();
-const clientUrl = process.env.NODE_ENV === "production" ? process.env.CLIENT_URL_PROD : process.env.CLIENT_URL_DEV;
 
 router.post("/login", requireLocalAuth, (req: any, res) => {
   const token = req.user.generateJWT();
-  res.cookie("x-auth-cookie", token);
-  res.redirect(clientUrl!);
+  const me = req.user.toJSON();
+  res.json({ token, me });
 });
 
 router.post("/register", async (req, res, next) => {
@@ -43,8 +42,7 @@ router.post("/register", async (req, res, next) => {
           throw err;
         }
         const token = user.generateJWT();
-        res.cookie("x-auth-cookie", token);
-        res.redirect(clientUrl!);
+        res.json({ message: "Register success." }); // redirect to login?
       });
     } catch (err) {
       return next(err);
