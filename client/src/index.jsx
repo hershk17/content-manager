@@ -6,12 +6,12 @@ import CssBaseline from "@mui/material/CssBaseline";
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom";
+import App from "./App";
 import ErrorPage from "./ErrorPage";
 import "./index.css";
-import Login from "./routes/Login";
 
 const router = createBrowserRouter(
-  createRoutesFromElements(<Route path="/" element={<Login />} errorElement={<ErrorPage />}></Route>)
+  createRoutesFromElements(<Route path="/" element={<App />} errorElement={<ErrorPage />}></Route>)
 );
 
 ReactDOM.createRoot(document.getElementById("root")).render(
