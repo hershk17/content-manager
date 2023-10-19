@@ -9,7 +9,7 @@ const isProduction = process.env.NODE_ENV === "production";
 const secretOrKey = isProduction ? process.env.JWT_SECRET_PROD : process.env.JWT_SECRET_DEV;
 const IMAGES_FOLDER_PATH = "/public/images/";
 
-interface IUser {
+export interface IUser {
   provider?: string;
   username?: string;
   email?: string;
@@ -19,14 +19,13 @@ interface IUser {
   role?: string;
   bio?: string;
   googleId?: string;
-  facebookId?: string;
 }
 
-interface IUserDocument extends IUser, Document {
-  toJSON(): any;
-  generateJWT(): any;
-  registerUser(newUser: any, callback: Function): any;
-  comparePassword(candidatePassword: string, callback: Function): any;
+export interface IUserDocument extends IUser, Document {
+  toJSON(): IUserDocument;
+  generateJWT(): string;
+  registerUser(newUser: IUserDocument, callback: Function): void;
+  comparePassword(candidatePassword: string, callback: Function): void;
 }
 
 const userSchema: Schema<IUserDocument> = new Schema(
@@ -38,7 +37,6 @@ const userSchema: Schema<IUserDocument> = new Schema(
     username: {
       type: String,
       lowercase: true,
-      unique: true,
       required: [true, "can't be blank"],
       match: [/^[a-zA-Z0-9_]+$/, "is invalid"],
       index: true,
@@ -46,10 +44,10 @@ const userSchema: Schema<IUserDocument> = new Schema(
     email: {
       type: String,
       lowercase: true,
-      unique: true,
       required: [true, "can't be blank"],
       match: [/\S+@\S+\.\S+/, "is invalid"],
       index: true,
+      unique: true,
     },
     password: {
       type: String,
@@ -61,14 +59,7 @@ const userSchema: Schema<IUserDocument> = new Schema(
     avatar: String,
     role: { type: String, default: "USER" },
     bio: String,
-    // google
     googleId: {
-      type: String,
-      unique: true,
-      sparse: true,
-    },
-    // fb
-    facebookId: {
       type: String,
       unique: true,
       sparse: true,
@@ -76,8 +67,6 @@ const userSchema: Schema<IUserDocument> = new Schema(
   },
   { timestamps: true }
 );
-
-console.log(join(__dirname, "../..", "/public/images/"));
 
 userSchema.methods.toJSON = function () {
   // if not exists avatar1 default
@@ -114,15 +103,18 @@ userSchema.methods.generateJWT = function () {
   return token;
 };
 
-userSchema.methods.registerUser = function (newUser: any, callback: Function) {
+userSchema.methods.registerUser = function (newUser: IUserDocument, callback: Function) {
   bcrypt.genSalt(10, (err, salt) => {
-    bcrypt.hash(newUser.password, salt, (errh, hash) => {
+    bcrypt.hash(newUser.password!, salt, (errh, hash) => {
       if (err) {
         console.log(err);
       }
       // set pasword to hash
       newUser.password = hash;
-      newUser.save(callback);
+      newUser
+        .save()
+        .then((user) => callback(user, null))
+        .catch((err) => callback(null, err));
     });
   });
 };
@@ -149,7 +141,7 @@ export default mongoose.model("User", userSchema);
 //   return hashedPassword;
 // }
 
-// export const validateUser = (user: any) => {
+// export const validateUser = (user) => {
 //   const schema = {
 //     avatar: Joi.any(),
 //     name: Joi.string().min(2).max(30).required(),

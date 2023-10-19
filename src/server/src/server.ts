@@ -10,14 +10,11 @@ import mongoose from "mongoose";
 import passport from "passport";
 import routes from "./routes";
 
-import "./services/auth/facebookStrategy";
 import "./services/auth/googleStrategy";
 import "./services/auth/jwtStrategy";
 import "./services/auth/localStrategy";
 
 import { resolve } from "path";
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = dirname(__filename);
 
 const app = express();
 const port = process.env.PORT || 3000;

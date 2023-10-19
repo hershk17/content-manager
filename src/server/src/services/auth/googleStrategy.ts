@@ -12,11 +12,8 @@ const googleLogin = new GoogleStrategy(
     proxy: true,
   },
   async (_accessToken, _refreshToken, userData, done) => {
-    const profile = userData._json;
-    console.log(userData);
-    console.log(profile);
     try {
-      const oldUser = await User.findOne({ email: profile.email });
+      const oldUser = await User.findOne({ email: userData._json.email });
 
       if (oldUser) {
         return done(null, oldUser);
@@ -31,9 +28,9 @@ const googleLogin = new GoogleStrategy(
         provider: "google",
         googleId: userData.id,
         username: `user${userData.id}`,
-        email: profile.email,
+        email: userData._json.email,
         name: userData.displayName,
-        avatar: profile.picture,
+        avatar: userData._json.picture,
       }).save();
 
       done(null, newUser);

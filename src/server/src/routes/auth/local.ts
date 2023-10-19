@@ -1,19 +1,16 @@
 import { faker } from "@faker-js/faker";
 import { Router } from "express";
 import { requireLocalAuth } from "../../middleware/requireAuth";
-import User from "../../models/user";
+import User, { IUserDocument } from "../../models/user";
 import { registerSchema } from "../../services/validators";
 
 const router = Router();
+const clientUrl = process.env.NODE_ENV === "production" ? process.env.CLIENT_URL_PROD : process.env.CLIENT_URL_DEV;
 
 router.post("/login", requireLocalAuth, (req: any, res) => {
-  if (!req.user) {
-    res.redirect("/"); // send a response instead?
-    return;
-  }
   const token = req.user.generateJWT();
-  const me = req.user.toJSON();
-  res.json({ token, me });
+  res.cookie("x-auth-cookie", token);
+  res.redirect(clientUrl!);
 });
 
 router.post("/register", async (req, res, next) => {
@@ -41,9 +38,13 @@ router.post("/register", async (req, res, next) => {
         avatar: faker.image.avatar(),
       });
 
-      newUser.registerUser(newUser, (err: Error | null, user: typeof User) => {
-        if (err) throw err;
-        res.json({ message: "Register success." }); // just redirect to login
+      newUser.registerUser(newUser, (user: IUserDocument | null, err: Error | null) => {
+        if (!user) {
+          throw err;
+        }
+        const token = user.generateJWT();
+        res.cookie("x-auth-cookie", token);
+        res.redirect(clientUrl!);
       });
     } catch (err) {
       return next(err);
