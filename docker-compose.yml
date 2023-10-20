@@ -1,41 +1,30 @@
 version: "3.8"
 
 services:
-  cm-client:
-    container_name: cm-client
-    restart: unless-stopped
-    image: hershk17/content-manager-client:latest
-    build:
-      # src must be in context
-      context: ./client
-      dockerfile: docker/Dockerfile
-    depends_on:
-      - cm-server
-    networks:
-      - internal-client
+  mongodb:
+    container_name: mongodb
+    image: mongo:5.0.2
+    restart: always
+    env_file: config/.env
     environment:
-      - NODE_ENV=production
-      # forwarded
-      - REACT_APP_BASE_URL
-    env_file:
-      - ./client/.env
-
-    # nginx ports
+      - MONGO_INITDB_ROOT_USERNAME
+      - MONGO_INITDB_ROOT_PASSWORD
     ports:
-      - "5173:80"
+      - 27017:27017
+    networks:
+      - backend
 
-  cm-server:
-    container_name: cm-server
-    restart: unless-stopped
-    image: hershk17/content-manager-server:latest
-    build:
-      context: ./server
-      dockerfile: docker/Dockerfile
+  server:
+    container_name: server
+    restart: always
     depends_on:
-      - cm-mongo
+      - mongodb
+    build: src/server
+    env_file: config/.env
+    ports:
+      - 3000:3000
     environment:
       - NODE_ENV=production
-      # forwarded
       - MONGO_URI_PROD
       - GOOGLE_CLIENT_ID
       - GOOGLE_CLIENT_SECRET
@@ -43,36 +32,26 @@ services:
       - JWT_SECRET_PROD
       - CLIENT_URL_PROD
       - SERVER_URL_PROD
-    env_file:
-      - ./server/.env
     networks:
-      - default
-      - internal-client
+      - backend
+      - frontend
 
-    # nginx ports
+  client:
+    container_name: client
+    restart: always
+    depends_on:
+      - server
+    image: hershk17/content-manager-client:latest
+    build:
+      context: src/client
     ports:
-      - "5000"
-
-  cm-mongo:
-    image: mongo:6.0.3
-    container_name: cm-mongo
-    restart: unless-stopped
-    ports:
-      - "27017"
+      - 5173:5173
     environment:
-      # forwarded
-      - MONGO_INITDB_DATABASE
-      - MONGO_INITDB_ROOT_USERNAME
-      - MONGO_INITDB_ROOT_PASSWORD
-    env_file:
-      - ./server/.env
-    volumes:
-      - ./server/docker/mongo-data:/data/db
+      - NODE_ENV=production
+      - REACT_APP_BASE_URL
     networks:
-      - default
+      - frontend 
 
 networks:
-  default:
-    name: cm-default
-  internal-client:
-    name: cm-client
+  backend:
+  frontend:

@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
-dotenv.config();
+import { resolve } from "path";
+dotenv.config({ path: resolve(__dirname, "../../../config/.env") });
 
 import bodyParser from "body-parser";
 import cors from "cors";
@@ -13,8 +14,6 @@ import routes from "./routes";
 import "./services/auth/googleStrategy";
 import "./services/auth/jwtStrategy";
 import "./services/auth/localStrategy";
-
-import { resolve } from "path";
 
 const app = express();
 const port = process.env.PORT || 3000;
