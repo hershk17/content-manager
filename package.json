@@ -7,8 +7,8 @@
     "fe": "cd src/client && npm run dev",
     "be": "cd src/server && npm run dev",
     "start": "concurrently \"npm run fe\" \"npm run be\"",
-    "docker:dev": "docker-compose -f docker/docker-compose.yml -f docker/docker-compose-dev.yml up --build",
-    "docker:prod": "docker-compose -f docker/docker-compose.yml -f docker/docker-compose-prod.yml up --build"
+    "docker:dev": "docker-compose --env-file config/.env.development up --build",
+    "docker:prod": "docker-compose --env-file config/.env.production up --build"
   },
   "keywords": [],
   "author": "Harsh Keswani",
