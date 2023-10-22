@@ -2,8 +2,7 @@ import passport from "passport";
 import { ExtractJwt, Strategy as JwtStrategy } from "passport-jwt";
 import User from "../../models/user";
 
-const isProduction = process.env.NODE_ENV === "production";
-const secretOrKey = isProduction ? process.env.JWT_SECRET_PROD : process.env.JWT_SECRET_DEV;
+const secretOrKey = process.env.JWT_SECRET;
 
 // JWT strategy
 const jwtLogin = new JwtStrategy(

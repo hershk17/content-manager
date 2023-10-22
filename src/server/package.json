@@ -4,8 +4,9 @@
   "description": "W.I.P",
   "main": "./src/server.ts",
   "scripts": {
-    "start": "NODE_ENV=production nodemon",
+    "start": "NODE_ENV=development nodemon",
     "dev": "NODE_ENV=development nodemon",
+    "prod": "NODE_ENV=production nodemon",
     "test": "jest --detectOpenHandles",
     "build": "tsc -p"
   },

@@ -2,7 +2,6 @@ import { Router } from "express";
 import passport from "passport";
 
 const router = Router();
-const clientUrl = process.env.NODE_ENV === "production" ? process.env.CLIENT_URL_PROD : process.env.CLIENT_URL_DEV;
 
 router.get(
   "/google",
@@ -19,7 +18,7 @@ router.get(
       const token = req.user.generateJWT();
       res.cookie("x-auth-cookie", token);
     }
-    res.redirect(clientUrl!);
+    res.redirect(process.env.CLIENT_URL!);
   }
 );
 

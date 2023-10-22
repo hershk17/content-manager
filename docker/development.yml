@@ -1,0 +1,11 @@
+version: "3.4"
+
+services:
+  client:
+    env_file: ../config/.env.development
+    environment:
+      - NODE_ENV=development
+  server:
+    env_file: ../config/.env.development
+    environment:
+      - NODE_ENV=development

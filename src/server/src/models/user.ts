@@ -6,7 +6,7 @@ import { join } from "path";
 import { isValidUrl } from "../services/validators";
 
 const isProduction = process.env.NODE_ENV === "production";
-const secretOrKey = isProduction ? process.env.JWT_SECRET_PROD : process.env.JWT_SECRET_DEV;
+const secretOrKey = process.env.JWT_SECRET;
 const IMAGES_FOLDER_PATH = "/public/images/";
 
 export interface IUser {
