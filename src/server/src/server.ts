@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 import { resolve } from "path";
-dotenv.config({ path: resolve(process.cwd(), `config/.env.${process.env.NODE_ENV}`) });
+dotenv.config({ path: resolve(process.cwd(), `../../.env`) });
 
 import bodyParser from "body-parser";
 import cors from "cors";

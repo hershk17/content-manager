@@ -3,7 +3,7 @@ version: '3.8'
 services:
   nginx:
     container_name: cm-nginx
-    image: cm-nginx
+    image: hershk17/cm-nginx:latest
     build:
       dockerfile: Dockerfile
       context: nginx
@@ -16,13 +16,14 @@ services:
 
   client:
     container_name: cm-client
-    image: cm-client
+    image: hershk17/cm-client:latest
     build:
       dockerfile: Dockerfile
       context: src/client
-    env_file: config/.env.${NODE_ENV}
     environment:
       - NODE_ENV=${NODE_ENV}
+      - CLIENT_URL=${CLIENT_URL}
+      - SERVER_URL=${SERVER_URL}
     ports:
       - 5173:5173
     volumes:
@@ -31,13 +32,18 @@ services:
 
   server:
     container_name: cm-server
-    image: cm-server
+    image: hershk17/cm-server:latest
     build:
       dockerfile: Dockerfile
       context: src/server
-    env_file: config/.env.${NODE_ENV}
     environment:
       - NODE_ENV=${NODE_ENV}
+      - MONGO_URI=${MONGO_URI}
+      - JWT_SECRET=${JWT_SECRET}
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+      - CLIENT_URL=${CLIENT_URL}
+      - SERVER_URL=${SERVER_URL}
     ports:
       - 3000:3000
     restart: always
