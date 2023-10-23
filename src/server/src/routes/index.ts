@@ -7,7 +7,7 @@ const router = Router();
 router.use("/auth", authRoutes);
 
 // test route
-router.get("/api/test", (req: any, res) => {
+router.get("/test", (req: any, res) => {
   res.json("Hello World");
 });
 

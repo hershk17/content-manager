@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 import { resolve } from "path";
-dotenv.config({ path: resolve(process.cwd(), `../../.env`) });
+// dotenv.config({ path: resolve(process.cwd(), `../../.env`) });
 
 import bodyParser from "body-parser";
 import cors from "cors";
@@ -35,6 +35,6 @@ mongoose
   .catch((err) => console.log(err));
 
 // Routes
-app.use("/", routes);
+app.use("/api", routes);
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  nginx:
+    container_name: cm-nginx
+    image: hershk17/cm-nginx:latest
+    restart: always
+    depends_on:
+      - client
+      - server
+    ports:
+      - 80:80
+
+  client:
+    container_name: cm-client
+    image: hershk17/cm-client:latest
+    restart: always
+
+  server:
+    container_name: cm-server
+    image: hershk17/cm-server:latest
+    restart: always
+

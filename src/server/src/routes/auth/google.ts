@@ -18,7 +18,7 @@ router.get(
       const token = req.user.generateJWT();
       res.cookie("x-auth-cookie", token);
     }
-    res.redirect(process.env.CLIENT_URL!);
+    res.redirect(process.env.REACT_CLIENT_URL!);
   }
 );
 
