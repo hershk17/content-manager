@@ -1,7 +1,19 @@
+/* eslint-disable perfectionist/sort-imports */
+import './global.css';
+
+import { useScrollToTop } from './hooks/use-scroll-to-top';
+
+import Router from './routes/sections';
+import ThemeProvider from './theme';
+
+// ----------------------------------------------------------------------
+
 export default function App() {
+  useScrollToTop();
+
   return (
-    <div>
-      <h1>Hello, world!</h1>
-    </div>
+    <ThemeProvider>
+      <Router />
+    </ThemeProvider>
   );
 }
