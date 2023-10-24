@@ -16,7 +16,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 
 import Iconify from '../../components/iconify';
 import Scrollbar from '../../components/scrollbar';
-import { ColorPicker } from '../../components/color-utils';
+// import { ColorPicker } from '../../components/color-utils';
 
 // ----------------------------------------------------------------------
 
@@ -26,8 +26,8 @@ export const SORT_OPTIONS = [
   { value: 'priceDesc', label: 'Price: High-Low' },
   { value: 'priceAsc', label: 'Price: Low-High' },
 ];
-export const GENDER_OPTIONS = ['Men', 'Women', 'Kids'];
-export const CATEGORY_OPTIONS = ['All', 'Shose', 'Apparel', 'Accessories'];
+export const GENDER_OPTIONS = ['Option 1', 'Option 2', 'Option 3'];
+export const CATEGORY_OPTIONS = ['All', 'Category A', 'Category B', 'Category C'];
 export const RATING_OPTIONS = ['up4Star', 'up3Star', 'up2Star', 'up1Star'];
 export const PRICE_OPTIONS = [
   { value: 'below', label: 'Below $25' },
@@ -50,7 +50,7 @@ export const COLOR_OPTIONS = [
 export default function ProductFilters({ openFilter, onOpenFilter, onCloseFilter }) {
   const renderGender = (
     <Stack spacing={1}>
-      <Typography variant="subtitle2">Gender</Typography>
+      <Typography variant="subtitle2">Filter 1</Typography>
       <FormGroup>
         {GENDER_OPTIONS.map((item) => (
           <FormControlLabel key={item} control={<Checkbox />} label={item} />
@@ -70,34 +70,34 @@ export default function ProductFilters({ openFilter, onOpenFilter, onCloseFilter
     </Stack>
   );
 
-  const renderColors = (
-    <Stack spacing={1}>
-      <Typography variant="subtitle2">Colors</Typography>
-      <ColorPicker
-        name="colors"
-        selected={[]}
-        colors={COLOR_OPTIONS}
-        onSelectColor={(color) => [].includes(color)}
-        sx={{ maxWidth: 38 * 4 }}
-      />
-    </Stack>
-  );
+  // const renderColors = (
+  //   <Stack spacing={1}>
+  //     <Typography variant="subtitle2">Colors</Typography>
+  //     <ColorPicker
+  //       name="colors"
+  //       selected={[]}
+  //       colors={COLOR_OPTIONS}
+  //       onSelectColor={(color) => [].includes(color)}
+  //       sx={{ maxWidth: 38 * 4 }}
+  //     />
+  //   </Stack>
+  // );
 
-  const renderPrice = (
-    <Stack spacing={1}>
-      <Typography variant="subtitle2">Price</Typography>
-      <RadioGroup>
-        {PRICE_OPTIONS.map((item) => (
-          <FormControlLabel
-            key={item.value}
-            value={item.value}
-            control={<Radio />}
-            label={item.label}
-          />
-        ))}
-      </RadioGroup>
-    </Stack>
-  );
+  // const renderPrice = (
+  //   <Stack spacing={1}>
+  //     <Typography variant="subtitle2">Price</Typography>
+  //     <RadioGroup>
+  //       {PRICE_OPTIONS.map((item) => (
+  //         <FormControlLabel
+  //           key={item.value}
+  //           value={item.value}
+  //           control={<Radio />}
+  //           label={item.label}
+  //         />
+  //       ))}
+  //     </RadioGroup>
+  //   </Stack>
+  // );
 
   const renderRating = (
     <Stack spacing={1}>
@@ -171,9 +171,9 @@ export default function ProductFilters({ openFilter, onOpenFilter, onCloseFilter
 
             {renderCategory}
 
-            {renderColors}
+            {/* {renderColors} */}
 
-            {renderPrice}
+            {/* {renderPrice} */}
 
             {renderRating}
           </Stack>

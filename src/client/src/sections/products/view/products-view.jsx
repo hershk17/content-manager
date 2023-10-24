@@ -9,7 +9,7 @@ import ProductCard from '../product-card';
 import ProductSort from '../product-sort';
 import ProductFilters from '../product-filters';
 import { products } from '../../../_mock/products';
-import ProductCartWidget from '../product-cart-widget';
+// import ProductCartWidget from '../product-cart-widget';
 
 // ----------------------------------------------------------------------
 
@@ -27,7 +27,7 @@ export default function ProductsView() {
   return (
     <Container>
       <Typography variant="h4" sx={{ mb: 5 }}>
-        Products
+        Library
       </Typography>
 
       <Stack
@@ -56,7 +56,7 @@ export default function ProductsView() {
         ))}
       </Grid>
 
-      <ProductCartWidget />
+      {/* <ProductCartWidget /> */}
     </Container>
   );
 }

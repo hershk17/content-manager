@@ -13,8 +13,6 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import { alpha, useTheme } from '@mui/material/styles';
 import InputAdornment from '@mui/material/InputAdornment';
 
-import Logo from '../../components/logo';
-import { bgGradient } from '../../theme/css';
 import { useRouter } from '../../routes/hooks';
 import Iconify from '../../components/iconify';
 
@@ -72,23 +70,7 @@ export default function LoginView() {
   );
 
   return (
-    <Box
-      sx={{
-        ...bgGradient({
-          color: alpha(theme.palette.background.default, 0.9),
-          imgUrl: '/assets/background/overlay_4.jpg',
-        }),
-        height: 1,
-      }}
-    >
-      <Logo
-        sx={{
-          position: 'fixed',
-          top: { xs: 16, md: 24 },
-          left: { xs: 16, md: 24 },
-        }}
-      />
-
+    <Box>
       <Stack alignItems="center" justifyContent="center" sx={{ height: 1 }}>
         <Card
           sx={{
@@ -97,7 +79,7 @@ export default function LoginView() {
             maxWidth: 420,
           }}
         >
-          <Typography variant="h4">Sign in to Minimal</Typography>
+          <Typography variant="h4">Sign in</Typography>
 
           <Typography variant="body2" sx={{ mt: 2, mb: 5 }}>
             Don’t have an account?

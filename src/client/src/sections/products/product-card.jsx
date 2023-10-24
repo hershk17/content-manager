@@ -4,11 +4,11 @@ import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
+// import Typography from '@mui/material/Typography';
 
 import Label from '../../components/label';
-import { fCurrency } from '../../utils/format-number';
-import { ColorPreview } from '../../components/color-utils';
+// import { fCurrency } from '../../utils/format-number';
+// import { ColorPreview } from '../../components/color-utils';
 
 // ----------------------------------------------------------------------
 
@@ -44,22 +44,22 @@ export default function ShopProductCard({ product }) {
     />
   );
 
-  const renderPrice = (
-    <Typography variant="subtitle1">
-      <Typography
-        component="span"
-        variant="body1"
-        sx={{
-          color: 'text.disabled',
-          textDecoration: 'line-through',
-        }}
-      >
-        {product.priceSale && fCurrency(product.priceSale)}
-      </Typography>
-      &nbsp;
-      {fCurrency(product.price)}
-    </Typography>
-  );
+  // const renderPrice = (
+  //   <Typography variant="subtitle1">
+  //     <Typography
+  //       component="span"
+  //       variant="body1"
+  //       sx={{
+  //         color: 'text.disabled',
+  //         textDecoration: 'line-through',
+  //       }}
+  //     >
+  //       {product.priceSale && fCurrency(product.priceSale)}
+  //     </Typography>
+  //     &nbsp;
+  //     {fCurrency(product.price)}
+  //   </Typography>
+  // );
 
   return (
     <Card>
@@ -74,10 +74,10 @@ export default function ShopProductCard({ product }) {
           {product.name}
         </Link>
 
-        <Stack direction="row" alignItems="center" justifyContent="space-between">
+        {/* <Stack direction="row" alignItems="center" justifyContent="space-between">
           <ColorPreview colors={product.colors} />
           {renderPrice}
-        </Stack>
+        </Stack> */}
       </Stack>
     </Card>
   );

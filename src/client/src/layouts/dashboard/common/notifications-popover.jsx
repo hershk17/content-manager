@@ -27,8 +27,8 @@ import Scrollbar from '../../../components/scrollbar';
 const NOTIFICATIONS = [
   {
     id: faker.string.uuid(),
-    title: 'Your order is placed',
-    description: 'waiting for shipping',
+    title: 'Started library sync',
+    description: 'waiting for authentication',
     avatar: null,
     type: 'order_placed',
     createdAt: set(new Date(), { hours: 10, minutes: 30 }),
@@ -37,7 +37,7 @@ const NOTIFICATIONS = [
   {
     id: faker.string.uuid(),
     title: faker.person.fullName(),
-    description: 'answered to your comment on the Minimal',
+    description: 'replied to your comment on the Nexus Hub',
     avatar: '/assets/images/avatars/avatar_2.jpg',
     type: 'friend_interactive',
     createdAt: sub(new Date(), { hours: 3, minutes: 30 }),
@@ -54,8 +54,8 @@ const NOTIFICATIONS = [
   },
   {
     id: faker.string.uuid(),
-    title: 'You have new mail',
-    description: 'sent from Guido Padberg',
+    title: 'Library updated',
+    description: 'new games added',
     avatar: null,
     type: 'mail',
     createdAt: sub(new Date(), { days: 2, hours: 3, minutes: 30 }),
@@ -63,8 +63,8 @@ const NOTIFICATIONS = [
   },
   {
     id: faker.string.uuid(),
-    title: 'Delivery processing',
-    description: 'Your order is being shipped',
+    title: 'Exporting your library',
+    description: 'packaging your data',
     avatar: null,
     type: 'order_shipped',
     createdAt: sub(new Date(), { days: 3, hours: 3, minutes: 30 }),
@@ -155,7 +155,7 @@ export default function NotificationsPopover() {
             disablePadding
             subheader={
               <ListSubheader disableSticky sx={{ py: 1, px: 2.5, typography: 'overline' }}>
-                Before that
+                Yesterday
               </ListSubheader>
             }
           >
