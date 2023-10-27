@@ -2,19 +2,13 @@ import bcrypt from "bcrypt";
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import { User } from "../models/user";
-import { loginSchema } from "../services/validators";
 
 const localStrategy = new LocalStrategy(
   {
     usernameField: "email",
     passwordField: "password",
-    passReqToCallback: true, // remove this and refactor
   },
-  async (req, email, password, done) => {
-    const { error } = loginSchema.validate(req.body);
-    if (error) {
-      return done(null, false);
-    }
+  async (email, password, done) => {
     try {
       const user = await User.findOne({ email });
       if (!user) {
@@ -26,7 +20,7 @@ const localStrategy = new LocalStrategy(
       return done(null, user);
     } catch (err) {
       console.log(err);
-      return done(err, false);
+      return done(err, false, { message: "Internal Server Error" });
     }
   }
 );

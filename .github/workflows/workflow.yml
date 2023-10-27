@@ -79,8 +79,8 @@ jobs:
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
           aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
-          application_name: game-nexus
-          environment_name: game-nexus-env
+          application_name: content-manager
+          environment_name: cm-env
           version_label: ${{ github.sha }} ${{ github.run_id }}-${{ github.run_attempt }}
           region: us-east-1
           deployment_package: docker-compose-aws.yml

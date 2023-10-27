@@ -21,12 +21,13 @@ services:
     restart: always
     environment:
       - NODE_ENV
-      - MONGO_URI
-      - JWT_SECRET
-      - GOOGLE_CLIENT_ID
-      - GOOGLE_CLIENT_SECRET
       - REACT_CLIENT_URL
       - EXPRESS_SERVER_URL
+      - MONGO_URI
+      - GOOGLE_CLIENT_ID
+      - GOOGLE_CLIENT_SECRET
+      - STEAM_API_KEY
+      - SESSION_SECRET
 "
 
 echo "$file_content"

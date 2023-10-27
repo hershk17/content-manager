@@ -9,15 +9,22 @@ import session from "express-session";
 import mongoose from "mongoose";
 import passport from "passport";
 import routes from "./routes";
+import MongoStore from "connect-mongo";
 
 import { IUser, User } from "./models/user";
 import "./passport";
 
-// Create the express app
 const app = express();
-const port = process.env.PORT || 3000;
 
-app.use(cors({ origin: "*" }));
+const port = process.env.PORT || 3000;
+const DB_URL = process.env.MONGO_URI;
+
+app.use(
+  cors({
+    origin: process.env.REACT_CLIENT_URL,
+    credentials: true,
+  })
+);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -25,12 +32,11 @@ app.use(
   session({
     secret: process.env.SESSION_SECRET!,
     resave: false,
-    saveUninitialized: true,
-    rolling: true,
-    cookie: {
-      maxAge: 360000,
-      secure: false,
-    },
+    saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: DB_URL,
+      touchAfter: 24 * 3600,
+    }),
   })
 );
 
@@ -38,14 +44,6 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Set up Mongoose connection to MongoDB database
-const DB_URL = process.env.MONGO_URI;
-mongoose
-  .connect(DB_URL!)
-  .then(() => console.log("MongoDB Connected..."))
-  .catch((err) => console.error("MongoDB connection error:", err));
-
-// Serialize and deserialize user
 passport.serializeUser((user, done) => {
   const currUser = user as IUser;
   done(null, currUser.id);
@@ -59,6 +57,12 @@ passport.deserializeUser(async (id, done) => {
     done(err, false);
   }
 });
+
+// Set up Mongoose connection to MongoDB database
+mongoose
+  .connect(DB_URL!)
+  .then(() => console.log("MongoDB Connected..."))
+  .catch((err) => console.error("MongoDB connection error:", err));
 
 // Routes
 app.use("/api", routes);

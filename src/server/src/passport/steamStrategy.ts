@@ -13,7 +13,6 @@ const steamStrategy = new SteamStrategy(
     const currUser = req.user;
     try {
       const updatedUser = await User.findOneAndUpdate({ email: currUser.email }, { steamId: userData.id });
-      console.log(updatedUser);
       done(null, updatedUser, { message: "Successfully Linked Steam account" });
     } catch (err) {
       done(null, false, { message: "Internal Server Error" });
