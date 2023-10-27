@@ -14,7 +14,7 @@ interface steamGame {
 
 export default function App() {
   const BASE_URL = window.location.origin;
-  const API_URL = BASE_URL.includes("localhost:5173") ? "http://localhost:3000/api" : `${BASE_URL}/api}`;
+  const API_URL = BASE_URL.includes("localhost:5173") ? "http://localhost:3000/api" : `${BASE_URL}/api`;
 
   const HandleGoogleSignin = () => {
     window.location.href = `${API_URL}/auth/google`;

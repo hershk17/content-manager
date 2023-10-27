@@ -39,12 +39,10 @@ const userSchema = new Schema<IUser>(
     },
     googleId: {
       type: String,
-      unique: true,
       sparse: true,
     },
     steamId: {
       type: String,
-      unique: true,
       sparse: true,
     },
   },
