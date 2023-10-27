@@ -1,59 +1,55 @@
-import { faker } from "@faker-js/faker";
+import bcrypt from "bcrypt";
 import { Router } from "express";
-import { requireLocalAuth } from "../../middleware/requireAuth";
-import User, { IUserDocument } from "../../models/user";
+import passport from "passport";
+import { User } from "../../models/user";
 import { registerSchema } from "../../services/validators";
 
 const router = Router();
 
-router.post("/login", requireLocalAuth, (req: any, res) => {
-  const token = req.user.generateJWT();
-  const me = req.user.toJSON();
-  res.json({ token, me });
+router.post("/login", (req, res, next) => {
+  // overriding authenticate's callback so that we can send responses in consistent format
+  passport.authenticate("local", (err: any, user: Express.User, info: { message: any }) => {
+    if (err) {
+      return res.status(500).send("Internal Server Error");
+    }
+    if (!user) {
+      return res.status(401).send(info.message);
+    }
+    // manually calling login here since we overrode the authenticate callback
+    req.logIn(user, (err) => {
+      if (err) {
+        return res.status(500).send("Internal Server Error");
+      }
+      return res.status(201).send("Logged in successfully");
+      // res.redirect(process.env.REACT_CLIENT_URL!);
+    });
+  })(req, res, next);
 });
 
-router.post("/register", async (req, res, next) => {
+router.post("/register", async (req, res) => {
   const { error } = registerSchema.validate(req.body);
   if (error) {
-    return res.status(422).send({ message: error.details[0].message });
+    return res.status(422).send(error.details[0].message);
   }
-
-  const { email, password, name, username } = req.body;
-
+  const { username, email, password } = req.body;
   try {
-    const existingUser = await User.findOne({ email });
-
+    const existingUser = await User.findOne({ username });
     if (existingUser) {
-      return res.status(422).send({ message: "Email is in use" });
+      return res.status(422).send("Username is not available");
     }
-
-    try {
-      const newUser = new User({
-        provider: "email",
-        email,
-        password,
-        username,
-        name,
-        avatar: faker.image.avatar(),
-      });
-
-      newUser.registerUser(newUser, (user: IUserDocument | null, err: Error | null) => {
-        if (!user) {
-          throw err;
-        }
-        const token = user.generateJWT();
-        res.json({ message: "Register success." }); // redirect to login?
-      });
-    } catch (err) {
-      return next(err);
-    }
-  } catch (err) {
-    return next(err);
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = new User({
+      email: email,
+      username: username,
+      password: hashedPassword,
+    });
+    await newUser.save();
+    return res.status(201).send("Registered successfully");
+    // res.redirect(process.env.REACT_CLIENT_URL!);
+  } catch (error) {
+    console.error("Registration error:", error);
+    return res.status(500).send("Internal Server Error");
   }
-});
-
-router.get("/logout", (req, res) => {
-  req.logout({}, () => res.send(false));
 });
 
 export default router;

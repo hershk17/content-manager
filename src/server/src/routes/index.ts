@@ -3,12 +3,11 @@ import authRoutes from "./auth";
 
 const router = Router();
 
+router.get("/", (_req, res) => {
+  res.send("Hello World!");
+});
+
 // routes go here
 router.use("/auth", authRoutes);
-
-// test route
-router.get("/test", (req: any, res) => {
-  res.json("Hello World");
-});
 
 export default router;
