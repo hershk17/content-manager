@@ -13,15 +13,24 @@ interface steamGame {
 }
 
 export default function App() {
-  const API_URL = window.location.origin.includes("localhost:5173")
-    ? "http://localhost:3000/api"
-    : `${window.location.origin}/api}`;
+  const BASE_URL = window.location.origin;
+  const API_URL = BASE_URL.includes("localhost:5173") ? "http://localhost:3000/api" : `${BASE_URL}/api}`;
 
-  const handleSignInClickSteam = () => {
+  const HandleGoogleSignin = () => {
+    window.location.href = `${API_URL}/auth/google`;
+  };
+  const handleSteamLink = () => {
     window.location.href = `${API_URL}/auth/steam`;
   };
-  const handleSignInClickGoogle = () => {
-    window.location.href = `${API_URL}/auth/google`;
+  const handleLogout = () => {
+    axios
+      .get(`${API_URL}/auth/logout`, { withCredentials: true })
+      .then((res) => {
+        window.location.href = `${BASE_URL}`;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   const [steamGames, setSteamGames] = useState<steamGame[]>([]);
@@ -41,11 +50,14 @@ export default function App() {
 
   return (
     <>
-      <button type="button" onClick={handleSignInClickSteam}>
-        Sign In Steam
-      </button>
-      <button type="button" onClick={handleSignInClickGoogle}>
+      <button type="button" onClick={HandleGoogleSignin}>
         Sign In Google
+      </button>
+      <button type="button" onClick={handleSteamLink}>
+        Link Steam
+      </button>
+      <button type="button" onClick={handleLogout}>
+        Logout
       </button>
       {/* <button type="button" onClick={handleRegisterClickLocal}>
         Register Local
