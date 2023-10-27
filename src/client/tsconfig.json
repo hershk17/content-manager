@@ -2,14 +2,15 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "forceConsistentCasingInFileNames": true,
-    "module": "commonjs",
     "esModuleInterop": true,
     "outDir": "./build",
     "rootDir": ".",
-    "target": "es6",
+    "target": "es2022",
+    "module": "es2022",
     "skipLibCheck": true,
     "strict": true,
-    "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "types": ["node", "react", "react-dom", "vite/client"]
   }
 }

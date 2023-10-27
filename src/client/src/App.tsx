@@ -13,24 +13,22 @@ interface steamGame {
 }
 
 export default function App() {
+  const API_URL = window.location.origin.includes("localhost:5173")
+    ? "http://localhost:3000/api"
+    : `${window.location.origin}/api}`;
+
   const handleSignInClickSteam = () => {
-    window.location.href = "http://localhost:3000/api/auth/steam";
+    window.location.href = `${API_URL}/auth/steam`;
   };
   const handleSignInClickGoogle = () => {
-    window.location.href = "http://localhost:3000/api/auth/google";
+    window.location.href = `${API_URL}/auth/google`;
   };
-  // const handleRegisterClickLocal = () => {
-  //   window.location.href = "http://localhost:3000/api/register";
-  // };
-  // const handleSignInClickLocal = () => {
-  //   window.location.href = "http://localhost:3000/api/login";
-  // };
 
   const [steamGames, setSteamGames] = useState<steamGame[]>([]);
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/api/library/steam`, { withCredentials: true })
+      .get(`${API_URL}/library/steam`, { withCredentials: true })
       .then((res) => {
         if (res.data.response.game_count > 0) {
           setSteamGames(res.data.response.games);
