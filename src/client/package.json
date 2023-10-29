@@ -38,6 +38,9 @@
     "vite-plugin-checker": "^0.6.2"
   },
   "devDependencies": {
-    "@types/react": "^18.2.33"
+    "@types/axios": "^0.14.0",
+    "@types/react": "^18.2.33",
+    "@types/react-dom": "^18.2.14",
+    "@types/react-router-dom": "^5.3.3"
   }
 }
