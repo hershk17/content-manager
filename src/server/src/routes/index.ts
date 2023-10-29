@@ -1,17 +1,22 @@
 import { Router } from "express";
+import requireAuth from "../middleware/requireAuth";
 import authRoutes from "./auth";
 import libraryRoutes from "./library";
-import authenticate from "../middleware/authenticate";
 
 const router = Router();
 
+// test routes
 router.get("/", (_req, res) => {
   res.send("Hello World!");
 });
 
-// routes go here
+// regular routes
 router.use("/auth", authRoutes);
 
-router.use("/library", authenticate, libraryRoutes);
+// protected routes
+router.get("/validate", requireAuth, (req, res) => {
+  return res.status(200).json(req.user);
+});
+router.use("/library", requireAuth, libraryRoutes);
 
 export default router;

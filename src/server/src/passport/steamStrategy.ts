@@ -7,16 +7,24 @@ const steamStrategy = new SteamStrategy(
     apiKey: process.env.STEAM_API_KEY,
     realm: process.env.EXPRESS_SERVER_URL,
     returnURL: `${process.env.EXPRESS_SERVER_URL}/auth/steam/callback`,
-    passReqToCallback: true,
   },
-  async (req: any, identifier: string, userData: any, done: Function) => {
-    const currUser = req.user;
+  async (identifier: string, userData: any, done: Function) => {
     try {
-      const updatedUser = await User.findOneAndUpdate({ email: currUser.email }, { steamId: userData.id });
-      done(null, updatedUser, { message: "Successfully Linked Steam account" });
+      // if user exists, return the user
+      const existingUser = await User.findOne({ steamId: userData.id });
+      if (existingUser) {
+        return done(null, existingUser);
+      }
+      // if user doesn't exist, create and save to db
+      const newUser = await new User({
+        steamId: userData.id,
+        username: userData.displayName,
+        avatar: userData.photos[1].value,
+      }).save();
+      return done(null, newUser);
     } catch (err) {
-      done(null, false, { message: "Internal Server Error" });
-      console.log(err);
+      console.error(err);
+      return done(null, false, { message: `Error: ${err}` });
     }
   }
 );

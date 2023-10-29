@@ -1,3 +1,2 @@
-import "./googleStrategy";
-import "./localStrategy";
+import "./jwtStrategy";
 import "./steamStrategy";
