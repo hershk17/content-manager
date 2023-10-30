@@ -2,12 +2,19 @@ import axios from "axios";
 import React, { createContext, useEffect, useState } from "react";
 
 const BASE_URL = window.location.origin;
-const API_URL = BASE_URL.includes("localhost:5173") ? "http://localhost:3000/api" : `${BASE_URL}/api`;
+const API_URL = "https://localhost:3000/api";
 
 interface User {
-  steamId: string;
-  username: string;
+  username: string; // UNIQUE IDENTIFIER
+  email: string;
+  password: string;
+  name: string;
   avatar: string;
+  provider: string;
+  googleId: string;
+  steamId: string;
+  facebookId: string;
+  twitterId: string;
 }
 
 interface AuthContextType {

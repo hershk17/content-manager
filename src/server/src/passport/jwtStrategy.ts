@@ -18,7 +18,7 @@ const jwtLogin = new JwtStrategy(
   },
   async (payload, done) => {
     try {
-      const user = await User.findOne({ steamId: payload.steamId });
+      const user = await User.findOne({ username: payload.username });
       if (user) {
         return done(null, user);
       }

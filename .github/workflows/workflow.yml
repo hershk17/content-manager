@@ -69,18 +69,20 @@ jobs:
           rm -rf /tmp/.buildx-cache
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
 
-      - name: Create Docker Compose File for AWS
-        shell: bash
-        run: |
-          bash ./scripts/create-docker-compose-aws.sh ${{ secrets.DOCKER_USERNAME }} ${{ github.sha }}
+      # temporary disabling deployments to beanstalk
 
-      - name: Deploy Images to Elastic Beanstalk
-        uses: einaregilsson/beanstalk-deploy@v21
-        with:
-          aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
-          aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
-          application_name: content-manager
-          environment_name: cm-env
-          version_label: ${{ github.sha }} ${{ github.run_id }}-${{ github.run_attempt }}
-          region: us-east-1
-          deployment_package: docker-compose-aws.yml
+      # - name: Create Docker Compose File for AWS
+      #   shell: bash
+      #   run: |
+      #     bash ./scripts/create-docker-compose-aws.sh ${{ secrets.DOCKER_USERNAME }} ${{ github.sha }}
+
+      # - name: Deploy Images to Elastic Beanstalk
+      #   uses: einaregilsson/beanstalk-deploy@v21
+      #   with:
+      #     aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
+      #     aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
+      #     application_name: content-manager
+      #     environment_name: cm-env
+      #     version_label: ${{ github.sha }} ${{ github.run_id }}-${{ github.run_attempt }}
+      #     region: us-east-1
+      #     deployment_package: docker-compose-aws.yml

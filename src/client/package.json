@@ -41,6 +41,7 @@
     "@types/axios": "^0.14.0",
     "@types/react": "^18.2.33",
     "@types/react-dom": "^18.2.14",
-    "@types/react-router-dom": "^5.3.3"
+    "@types/react-router-dom": "^5.3.3",
+    "vite-plugin-mkcert": "^1.16.0"
   }
 }

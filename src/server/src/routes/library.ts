@@ -11,7 +11,7 @@ router.get("/steam", async (req, res) => {
     const response = await axios.get(steam_url);
     res.status(200).send(response.data.response);
   } catch (error) {
-    console.error(error);
+    // console.error(error);
     res.status(500).send("Error fetching games from Steam");
   }
 });

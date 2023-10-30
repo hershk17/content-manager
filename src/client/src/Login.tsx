@@ -1,18 +1,24 @@
 import "./global.css";
 
 const BASE_URL = window.location.origin;
-const API_URL = BASE_URL.includes("localhost:5173") ? "http://localhost:3000/api" : `${BASE_URL}/api`;
+const API_URL = "https://localhost:3000/api";
 
 export default function App() {
-  const handleLogin = () => {
-    window.location.href = `${API_URL}/auth/steam`;
+  const handleGoogleLogin = () => {
+    window.location.href = `${API_URL}/auth/google`;
+  };
+  const handleFacebookLogin = () => {
+    window.location.href = `${API_URL}/auth/facebook`;
   };
 
   return (
     <>
       You are not logged in. <br /> <br />
-      <button type="button" onClick={handleLogin}>
-        Sign In with Steam
+      <button type="button" onClick={handleGoogleLogin}>
+        Sign In with Google
+      </button>
+      <button type="button" onClick={handleFacebookLogin}>
+        Sign In with Facebook
       </button>
     </>
   );

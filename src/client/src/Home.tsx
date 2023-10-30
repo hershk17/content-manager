@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "./providers/AuthProvider";
 
 const BASE_URL = window.location.origin;
-const API_URL = BASE_URL.includes("localhost:5173") ? "http://localhost:3000/api" : `${BASE_URL}/api`;
+const API_URL = "https://localhost:3000/api";
 
 interface steamGame {
   appid: number;
@@ -12,8 +12,6 @@ interface steamGame {
   playtime_forever: number;
   img_icon_url: string;
   rtime_last_played: number;
-  // has_community_visible_stats: boolean;
-  // playtime_disconnected: number;
 }
 
 function App() {
@@ -23,6 +21,7 @@ function App() {
   const [steamGames, setSteamGames] = useState<steamGame[]>([]);
 
   useEffect(() => {
+    if (!user?.steamId) return;
     axios
       .get(`${API_URL}/library/steam`, { withCredentials: true })
       .then((res) => {
@@ -35,6 +34,16 @@ function App() {
       });
   }, []);
 
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/login");
+    }
+  }, [isAuthenticated]);
+
+  const handleSteamLink = () => {
+    window.location.href = `${API_URL}/auth/steam`;
+  };
+
   const handleLogout = () => {
     axios
       .get(`${API_URL}/auth/logout`, { withCredentials: true })
@@ -46,45 +55,52 @@ function App() {
       });
   };
 
-  useEffect(() => {
-    if (!isAuthenticated) {
-      navigate("/login");
-    }
-  }, [isAuthenticated]);
-
   return (
     <>
-      Hi {user?.username}! <br /> <br />
+      Hi {user?.name}!, your username is {user?.username}! <br /> <br />
       <button type="button" onClick={handleLogout}>
         Logout
       </button>
-      {steamGames.length > 0 && (
-        <table>
-          <thead>
-            <tr>
-              <th>App Id</th>
-              <th>Game</th>
-              <th>Hours Played</th>
-              <th>Last Played</th>
-            </tr>
-          </thead>
-          <tbody>
-            {steamGames.map((game) => (
-              <tr key={game.appid}>
-                <td>{game.appid}</td>
-                <td>
-                  <img
-                    src={`http://media.steampowered.com/steamcommunity/public/images/apps/${game.appid}/${game.img_icon_url}.jpg`}
-                    alt={`${game.name} icon`}
-                  />
-                  {game.name}
-                </td>
-                <td>{Math.round(game.playtime_forever / 60)}</td>
-                <td>{new Date(game.rtime_last_played * 1000).toDateString()}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <h2>Your Library</h2>
+      {!user?.steamId ? (
+        <div>
+          <button type="button" onClick={handleSteamLink}>
+            Connect Steam
+          </button>
+        </div>
+      ) : (
+        <div>
+          {steamGames.length === 0 ? (
+            <span>You have no games in your steam library.</span>
+          ) : (
+            <table>
+              <thead>
+                <tr>
+                  <th>App Id</th>
+                  <th>Game</th>
+                  <th>Hours Played</th>
+                  <th>Last Played</th>
+                </tr>
+              </thead>
+              <tbody>
+                {steamGames.map((game) => (
+                  <tr key={game.appid}>
+                    <td>{game.appid}</td>
+                    <td>
+                      <img
+                        src={`http://media.steampowered.com/steamcommunity/public/images/apps/${game.appid}/${game.img_icon_url}.jpg`}
+                        alt={`${game.name} icon`}
+                      />
+                      {game.name}
+                    </td>
+                    <td>{Math.round(game.playtime_forever / 60)}</td>
+                    <td>{new Date(game.rtime_last_played * 1000).toDateString()}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </div>
       )}
     </>
   );

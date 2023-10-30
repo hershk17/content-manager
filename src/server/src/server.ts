@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
-import { resolve } from "path";
+import { join, resolve } from "path";
+import https from "https";
 dotenv.config({ path: resolve(process.cwd(), `../../.env`) });
 
 import bodyParser from "body-parser";
@@ -11,6 +12,7 @@ import passport from "passport";
 import routes from "./routes";
 
 import "./passport";
+import { readFileSync } from "fs";
 
 const app = express();
 
@@ -39,4 +41,26 @@ mongoose
 // Routes
 app.use("/api", routes);
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+const isProduction = process.env.NODE_ENV === "production";
+
+if (isProduction) {
+  // Set static folder
+  // nginx will handle this
+  app.use(express.static(join(__dirname, "../../client/dist")));
+
+  app.get("*", (req, res) => {
+    // index is in /server/src so 2 folders up
+    res.sendFile(resolve(__dirname, "../..", "client", "dist", "index.html"));
+  });
+
+  app.listen(port, () => console.log(`Listening on port ${port}`));
+} else {
+  const httpsOptions = {
+    key: readFileSync(resolve(__dirname, "../security/cert.key")),
+    cert: readFileSync(resolve(__dirname, "../security/cert.pem")),
+  };
+
+  const server = https.createServer(httpsOptions, app).listen(port, () => {
+    console.log(`(https) Listening on port ${port}`);
+  });
+}

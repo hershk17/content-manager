@@ -10,7 +10,7 @@ const requireAuth = (req: Request, res: Response, next: NextFunction) => {
     if (!user) {
       return res.status(401).send("Unauthorized");
     }
-    req.user = user as any;
+    req.user = user as IUser;
     return next();
   })(req, res, next);
 };
