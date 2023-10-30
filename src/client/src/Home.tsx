@@ -3,9 +3,6 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "./providers/AuthProvider";
 
-const BASE_URL = window.location.origin;
-const API_URL = "https://localhost:3000/api";
-
 interface steamGame {
   appid: number;
   name: string;
@@ -19,6 +16,8 @@ function App() {
   const navigate = useNavigate();
 
   const [steamGames, setSteamGames] = useState<steamGame[]>([]);
+
+  const API_URL = import.meta.env.VITE_SERVER_URL;
 
   useEffect(() => {
     if (!user?.steamId) return;

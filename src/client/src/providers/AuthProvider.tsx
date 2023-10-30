@@ -1,9 +1,6 @@
 import axios from "axios";
 import React, { createContext, useEffect, useState } from "react";
 
-const BASE_URL = window.location.origin;
-const API_URL = "https://localhost:3000/api";
-
 interface User {
   username: string; // UNIQUE IDENTIFIER
   email: string;
@@ -39,6 +36,8 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState<User | null>(null);
+
+  const API_URL = import.meta.env.VITE_SERVER_URL;
 
   useEffect(() => {
     const validateUser = async () => {

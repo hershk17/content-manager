@@ -1,4 +1,4 @@
-import "./facebookStrategy";
+// import "./facebookStrategy";
 import "./googleStrategy";
 import "./jwtStrategy";
 import "./localStrategy";

@@ -7,8 +7,9 @@
     "start": "NODE_ENV=development nodemon",
     "dev": "NODE_ENV=development nodemon",
     "prod": "NODE_ENV=production nodemon",
-    "test": "jest --detectOpenHandles",
-    "build": "tsc -p"
+    "docker:start:prod": "node ./build/server.js",
+    "build": "tsc",
+    "test": "jest --detectOpenHandles"
   },
   "keywords": [],
   "author": "Harsh Keswani",

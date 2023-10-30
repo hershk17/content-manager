@@ -6,7 +6,7 @@ const facebookStrategy = new FacebookStrategy(
   {
     clientID: process.env.FACEBOOK_CLIENT_ID!,
     clientSecret: process.env.FACEBOOK_CLIENT_SECRET!,
-    callbackURL: `${process.env.EXPRESS_SERVER_URL}/auth/facebook/callback`,
+    callbackURL: `${process.env.VITE_SERVER_URL}/auth/facebook/callback`,
     profileFields: ["id", "email", "displayName", "name", "picture.type(large)"],
   },
   async (_accessToken, _refreshToken, userData, done) => {

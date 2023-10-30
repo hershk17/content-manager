@@ -21,7 +21,7 @@ router.get("/google/callback", passport.authenticate("google", { session: false 
       process.env.JWT_SECRET!
     );
     res.cookie("x-auth-token", token, { maxAge: 14 * 24 * 60 * 60 * 1000 });
-    res.status(200).redirect(process.env.REACT_CLIENT_URL!);
+    res.status(200).redirect(process.env.VITE_CLIENT_URL!);
   }
 });
 

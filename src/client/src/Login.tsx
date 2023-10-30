@@ -1,15 +1,14 @@
 import "./global.css";
 
-const BASE_URL = window.location.origin;
-const API_URL = "https://localhost:3000/api";
-
 export default function App() {
+  const API_URL = import.meta.env.VITE_SERVER_URL;
+
   const handleGoogleLogin = () => {
     window.location.href = `${API_URL}/auth/google`;
   };
-  const handleFacebookLogin = () => {
-    window.location.href = `${API_URL}/auth/facebook`;
-  };
+  // const handleFacebookLogin = () => {
+  //   window.location.href = `${API_URL}/auth/facebook`;
+  // };
 
   return (
     <>
@@ -17,9 +16,9 @@ export default function App() {
       <button type="button" onClick={handleGoogleLogin}>
         Sign In with Google
       </button>
-      <button type="button" onClick={handleFacebookLogin}>
+      {/* <button type="button" onClick={handleFacebookLogin}>
         Sign In with Facebook
-      </button>
+      </button> */}
     </>
   );
 }

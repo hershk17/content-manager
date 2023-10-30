@@ -6,7 +6,7 @@ const googleStrategy = new GoogleStrategy(
   {
     clientID: process.env.GOOGLE_CLIENT_ID!,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-    callbackURL: `${process.env.EXPRESS_SERVER_URL}/auth/google/callback`,
+    callbackURL: `${process.env.VITE_SERVER_URL}/auth/google/callback`,
   },
   async (_accessToken, _refreshToken, userData, done) => {
     try {

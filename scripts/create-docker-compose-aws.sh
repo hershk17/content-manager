@@ -14,20 +14,24 @@ services:
     container_name: cm-client
     image: $1/cm-client:$2
     restart: always
+    environment:
+      - VITE_CLIENT_URL
+      - VITE_SERVER_URL
 
   server:
     container_name: cm-server
     image: $1/cm-server:$2
     restart: always
     environment:
-      - NODE_ENV
-      - REACT_CLIENT_URL
-      - EXPRESS_SERVER_URL
+      - VITE_CLIENT_URL
+      - VITE_SERVER_URL
       - MONGO_URI
       - GOOGLE_CLIENT_ID
       - GOOGLE_CLIENT_SECRET
+      - FACEBOOK_CLIENT_ID
+      - FACEBOOK_CLIENT_SECRET
       - STEAM_API_KEY
-      - SESSION_SECRET
+      - JWT_SECRET
 "
 
 echo "$file_content"

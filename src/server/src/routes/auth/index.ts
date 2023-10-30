@@ -9,7 +9,7 @@ const router = Router();
 // sign in providers
 router.use("/", localAuthRoutes);
 router.use("/", googleAuthRoutes);
-router.use("/", facebookAuthRoutes);
+// router.use("/", facebookAuthRoutes);
 
 // account linking providers
 router.use("/", steamAuthRoutes);
