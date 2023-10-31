@@ -1,24 +1,15 @@
 import axios from "axios";
 import React, { createContext, useEffect, useState } from "react";
-
-interface User {
-  username: string; // UNIQUE IDENTIFIER
-  email: string;
-  password: string;
-  name: string;
-  avatar: string;
-  provider: string;
-  googleId: string;
-  steamId: string;
-  facebookId: string;
-  twitterId: string;
-}
+import { useNavigate } from "react-router-dom";
+import User from "../models/User";
 
 interface AuthContextType {
   isAuthenticated: boolean;
   setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
   isLoading: boolean;
   user: User | null;
+  setUser: React.Dispatch<React.SetStateAction<User | null>>;
+  logout: () => void;
 }
 
 export const AuthContext = createContext<AuthContextType>({
@@ -26,6 +17,8 @@ export const AuthContext = createContext<AuthContextType>({
   setIsAuthenticated: () => null,
   isLoading: true,
   user: null,
+  setUser: () => null,
+  logout: () => null,
 });
 
 interface Props {
@@ -33,32 +26,68 @@ interface Props {
 }
 
 const AuthProvider: React.FC<Props> = ({ children }) => {
+  const API_URL = import.meta.env.VITE_SERVER_URL;
+
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState<User | null>(null);
 
-  const API_URL = import.meta.env.VITE_SERVER_URL;
+  const navigate = useNavigate();
+
+  axios.interceptors.response.use(
+    (response) => response,
+    (error) => {
+      if (error.response.status === 401 && !error.response.config.url?.includes("/validate")) {
+        setIsAuthenticated(false);
+        setUser(null);
+        navigate("/login");
+      }
+      return Promise.reject(error);
+    }
+  );
+
+  const validateUser = async () => {
+    try {
+      const response = await axios.get(`${API_URL}/validate`, { withCredentials: true });
+      if (response.status === 200) {
+        setIsAuthenticated(true);
+        setUser(response.data);
+      }
+    } catch (error) {
+      setIsAuthenticated(false);
+      setUser(null);
+      navigate("/login");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const logout = () => {
+    axios
+      .get(`${API_URL}/auth/logout`, { withCredentials: true })
+      .then((res) => {
+        setIsAuthenticated(false);
+        setUser(null);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   useEffect(() => {
-    const validateUser = async () => {
-      try {
-        const response = await axios.get(`${API_URL}/validate`, { withCredentials: true });
-        if (response.status === 200) {
-          setIsAuthenticated(true);
-          setUser(response.data);
-        }
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
     validateUser();
   }, []);
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated, isLoading, user }}>
+    <AuthContext.Provider
+      value={{
+        isAuthenticated,
+        setIsAuthenticated,
+        isLoading,
+        user,
+        setUser,
+        logout,
+      }}>
       {children}
     </AuthContext.Provider>
   );
