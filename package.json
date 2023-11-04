@@ -26,6 +26,8 @@
   },
   "homepage": "https://github.com/hershk17/content-manager/issues#readme",
   "dependencies": {
-    "concurrently": "^8.2.2"
+    "@reduxjs/toolkit": "^1.9.7",
+    "concurrently": "^8.2.2",
+    "react-redux": "^8.1.3"
   }
 }
