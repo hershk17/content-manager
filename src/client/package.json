@@ -2,22 +2,25 @@
   "name": "client",
   "private": true,
   "version": "1.0.0",
+  "description": "W.I.P",
   "type": "module",
   "scripts": {
     "start": "vite",
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "start:prod": "npm run build && npm run preview",
+    "test": "vitest"
   },
   "proxy": "http://localhost:3000/",
+  "keywords": [],
+  "license": "ISC",
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@faker-js/faker": "^8.2.0",
     "@iconify/react": "^4.1.1",
     "@mui/lab": "^5.0.0-alpha.149",
-    "@mui/material": "^5.14.14",
-    "@vitejs/plugin-react-swc": "^3.4.0",
+    "@mui/material": "^5.14.15",
     "apexcharts": "^3.44.0",
     "axios": "^1.6.0",
     "date-fns": "^2.30.0",
@@ -33,11 +36,19 @@
     "react-hook-form": "^7.47.0",
     "react-router-dom": "^6.17.0",
     "simplebar-react": "^3.2.4",
-    "typescript": "^5.2.2",
     "vite": "^4.5.0",
     "vite-plugin-checker": "^0.6.2"
   },
   "devDependencies": {
-    "@types/react": "^18.2.33"
+    "@testing-library/jest-dom": "^6.1.4",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.5.1",
+    "@types/react": "^18.2.33",
+    "@types/react-dom": "^18.2.14",
+    "@types/react-router-dom": "^5.3.3",
+    "@vitejs/plugin-react-swc": "^3.4.1",
+    "jsdom": "^22.1.0",
+    "typescript": "^5.2.2",
+    "vitest": "^0.34.6"
   }
 }

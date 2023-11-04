@@ -1,38 +1,34 @@
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
-import { User } from "../models/user";
+import { User } from "../../models/user";
 
 const googleStrategy = new GoogleStrategy(
   {
     clientID: process.env.GOOGLE_CLIENT_ID!,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-    callbackURL: `${process.env.EXPRESS_SERVER_URL}/auth/google/callback`,
+    callbackURL: `${process.env.VITE_SERVER_URL}/auth/google/callback`,
   },
   async (_accessToken, _refreshToken, userData, done) => {
-    const profile = userData._json;
     try {
-      // if user exists we return the user
-      const existingUser = await User.findOne({ email: profile.email });
+      const profile = userData._json;
+      // if user exists, return the user
+      const existingUser = await User.findOne({ googleId: profile.sub });
       if (existingUser) {
         return done(null, existingUser);
       }
-    } catch (err) {
-      console.log(err);
-      return done(err as Error, false);
-    }
-    // user doesn't exist so we create and save to db
-    try {
+      // if user doesn't exist, create and save to db
       const newUser = await new User({
-        provider: userData.provider,
-        googleId: userData.id,
-        username: userData.provider + userData.id,
+        username: "g" + profile.sub,
         name: profile.name,
         avatar: profile.picture,
         email: profile.email,
+        provider: "google",
+        googleId: profile.sub,
       }).save();
       done(null, newUser);
     } catch (err) {
-      console.log(err);
+      console.error(err);
+      return done(null, false, { message: `Error: ${err}` });
     }
   }
 );

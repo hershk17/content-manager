@@ -1,33 +1,27 @@
 import bcrypt from "bcrypt";
 import { Router } from "express";
+import JWT from "jsonwebtoken";
 import passport from "passport";
-import { User } from "../../models/user";
-import { loginSchema, registerSchema } from "../../services/validators";
+import { IUser, User } from "../../models/user";
+import { registerSchema } from "../../services/validators";
 
 const router = Router();
 
-router.post("/login", (req, res, next) => {
-  // overriding authenticate's callback so that we can send responses in consistent format
-  passport.authenticate("local", (err: any, user: Express.User, info: { message: any }) => {
-    const { error } = loginSchema.validate(req.body);
-    if (error) {
-      return res.status(422).send(error.details[0].message);
-    }
-    if (err) {
-      return res.status(500).send("Internal Server Error");
-    }
-    if (!user) {
-      return res.status(401).send(info.message);
-    }
-    // manually calling login here since we overrode the authenticate callback
-    req.logIn(user, (err) => {
-      if (err) {
-        return res.status(500).send("Internal Server Error");
-      }
-      return res.status(201).send("Logged in successfully");
-      // res.redirect(process.env.REACT_CLIENT_URL!);
-    });
-  })(req, res, next);
+router.post("/login", passport.authenticate("local", { session: false }), (req, res) => {
+  if (req.isAuthenticated()) {
+    const user = req.user as IUser;
+    const token = JWT.sign(
+      {
+        expiresIn: "14d",
+        username: user.username,
+        email: user.email,
+        provider: user.provider,
+      },
+      process.env.JWT_SECRET!
+    );
+    res.cookie("x-auth-token", token, { maxAge: 14 * 24 * 60 * 60 * 1000 });
+    res.status(200).redirect(process.env.VITE_CLIENT_URL!);
+  }
 });
 
 router.post("/register", async (req, res) => {
@@ -37,7 +31,7 @@ router.post("/register", async (req, res) => {
   }
   const { username, email, password } = req.body;
   try {
-    const existingEmail = await User.findOne({ email });
+    const existingEmail = await User.findOne({ provider: "local", email });
     const existingUsername = await User.findOne({ username });
     if (existingEmail) {
       return res.status(422).send("Email is not available");
@@ -47,12 +41,14 @@ router.post("/register", async (req, res) => {
     }
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = await new User({
-      email: email,
       username: username,
+      email: email,
       password: hashedPassword,
+      name: username,
+      provider: "local",
     }).save();
     return res.status(201).send("Registered successfully");
-    // res.redirect(process.env.REACT_CLIENT_URL!);
+    // also login the user?
   } catch (error) {
     console.error("Registration error:", error);
     return res.status(500).send("Internal Server Error");

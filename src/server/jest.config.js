@@ -1,5 +1,4 @@
-export default {
-  transform: {
-    "^.+\\.[t|j]sx?$": "babel-jest",
-  },
+module.exports = {
+  preset: "ts-jest",
+  testEnvironment: "node",
 };
