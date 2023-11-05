@@ -10,10 +10,10 @@
     "start": "concurrently \"npm run start:client\" \"npm run start:server\"",
     "install:client": "cd src/client && npm install",
     "install:server": "cd src/server && npm install",
-    "install:global": "concurrently \"npm install\" \"npm run install:client\" \"npm run install:server\"",
+    "install:global": "npm run install:client && npm run install:server",
     "build:client": "cd src/client && npm run build",
     "build:server": "cd src/server && npm run build",
-    "build": "concurrently \"npm run build:client\" \"npm run build:server\""
+    "build": "npm run build:client && npm run build:server"
   },
   "keywords": [],
   "license": "ISC",
