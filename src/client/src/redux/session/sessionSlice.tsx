@@ -1,22 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import User from "../../models/User";
 
-export interface LoadingState {
-    email: string;
-    username: string;
-    userId: string;
-    steamId: string;
-    name: string;
-    provider: string;
-}
-
-const initialState: LoadingState = {
+const initialState: User = {
+    username: "", // UNIQUE IDENTIFIER
     email: "",
-    username: "",
-    userId: "",
-    steamId: "",
+    password: "",
     name: "",
+    avatar: "",
     provider: "",
+    googleId: "",
+    steamId: "",
+    facebookId: "",
+    twitterId: "",
 };
 
 export const counterSlice = createSlice({
@@ -33,11 +29,14 @@ export const counterSlice = createSlice({
         setUsername: (state, action: PayloadAction<string>) => {
             state.username = action.payload;
         },
-        setUserId: (state, action: PayloadAction<string>) => {
-            state.userId = action.payload;
-        },
         setSteamId: (state, action: PayloadAction<string>) => {
             state.steamId = action.payload;
+        },
+        setFacebookId: (state, action: PayloadAction<string>) => {
+            state.facebookId = action.payload;
+        },
+        setTwitterId: (state, action: PayloadAction<string>) => {
+            state.twitterId = action.payload;
         },
         setName: (state, action: PayloadAction<string>) => {
             state.name = action.payload;
@@ -46,19 +45,20 @@ export const counterSlice = createSlice({
             state.provider = action.payload;
         },
 
-        clearSession: (state) => {
-            state.email = "";
-            state.username = "";
-            state.userId = "";
-            state.steamId = "";
-            state.name = "";
-            state.provider = "";
-        },
+        clearSession: (state) => initialState,
     },
 });
 
 // Action creators are generated for each case reducer function
-export const { setEmail, setUsername, setUserId, setSteamId, setName, setProvider, clearSession } =
-    counterSlice.actions;
+export const {
+    setEmail,
+    setUsername,
+    setFacebookId,
+    setTwitterId,
+    setSteamId,
+    setName,
+    setProvider,
+    clearSession,
+} = counterSlice.actions;
 
 export default counterSlice.reducer;
