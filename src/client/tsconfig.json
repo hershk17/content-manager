@@ -8,6 +8,7 @@
     "target": "es2022",
     "module": "es2022",
     "skipLibCheck": true,
+    "allowJs": true,
     "strict": true,
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
