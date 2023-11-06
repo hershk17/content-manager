@@ -15,7 +15,7 @@ const initialState: User = {
     twitterId: "",
 };
 
-export const counterSlice = createSlice({
+export const sessionSlice = createSlice({
     name: "session",
     initialState,
     reducers: {
@@ -53,12 +53,12 @@ export const counterSlice = createSlice({
 export const {
     setEmail,
     setUsername,
+    setSteamId,
     setFacebookId,
     setTwitterId,
-    setSteamId,
     setName,
     setProvider,
     clearSession,
-} = counterSlice.actions;
+} = sessionSlice.actions;
 
-export default counterSlice.reducer;
+export default sessionSlice.reducer;

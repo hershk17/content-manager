@@ -10,7 +10,7 @@ const initialState: LibraryState = {
     value: [],
 };
 
-export const counterSlice = createSlice({
+export const librarySlice = createSlice({
     name: "library",
     initialState,
     reducers: {
@@ -22,10 +22,11 @@ export const counterSlice = createSlice({
                 return value.appid !== action.payload.appid;
             });
         },
+        resetLibrary: (state) => initialState,
     },
 });
 
 // Action creators are generated for each case reducer function
-export const { addGame, removeGame } = counterSlice.actions;
+export const { addGame, removeGame } = librarySlice.actions;
 
-export default counterSlice.reducer;
+export default librarySlice.reducer;
