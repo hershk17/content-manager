@@ -3,7 +3,7 @@
     "jsx": "react-jsx",
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
-    "outDir": "./build",
+    "outDir": "./dist",
     "rootDir": ".",
     "target": "es2022",
     "module": "es2022",

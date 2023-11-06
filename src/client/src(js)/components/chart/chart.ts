@@ -3,11 +3,7 @@ import { memo } from "react";
 import ApexChart from "react-apexcharts";
 import { bgBlur } from "../../theme/css";
 
-interface Props {
-  theme: CustomTheme;
-}
-
-const Chart = styled(ApexChart)(({ theme }: Props) => ({
+const Chart = styled(ApexChart)(({ theme }: any) => ({
   "& .apexcharts-canvas": {
     // Tooltip
     "& .apexcharts-tooltip": {
