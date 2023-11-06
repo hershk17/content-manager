@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import counterReducer from "../counter/counterSlice";
+import isLoadingReducer from "../isLoading/isLoadingSlice";
 
 export const store = configureStore({
     reducer: {
         counter: counterReducer,
+        isLoading: isLoadingReducer,
     },
 });
 
