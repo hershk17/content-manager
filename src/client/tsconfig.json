@@ -1,17 +1,17 @@
 {
-    "compilerOptions": {
-        "jsx": "react-jsx",
-        "forceConsistentCasingInFileNames": true,
-        "esModuleInterop": true,
-        "outDir": "./dist",
-        "rootDir": ".",
-        "target": "es2022",
-        "module": "es2022",
-        "skipLibCheck": true,
-        "allowJs": true,
-        "strict": true,
-        "moduleResolution": "node",
-        "allowSyntheticDefaultImports": true,
-        "types": ["node", "react", "react-dom", "vite/client", "vitest/globals"]
-    }
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "outDir": "./dist",
+    "rootDir": ".",
+    "target": "es2022",
+    "module": "es2022",
+    "skipLibCheck": true,
+    "allowJs": true,
+    "strict": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "types": ["node", "react", "react-dom", "vite/client", "vitest/globals"]
+  }
 }

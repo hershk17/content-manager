@@ -1,43 +1,37 @@
-import { useContext } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import { AuthContext } from "./providers/AuthProvider";
 import RequireAuth from "./components/RequireAuth";
-import ReduxTest from "./pages/ReduxTest";
+import Login from "./features/auth/Login";
+import { validateUser } from "./features/auth/authSlice";
+import Home from "./features/library/Library";
+import { AppDispatch, RootState } from "./stores/store";
 
 const App = () => {
-    const { isLoading } = useContext(AuthContext);
+  const dispatch = useDispatch<AppDispatch>();
+  const isLoading = useSelector((state: RootState) => state.auth.isLoading);
 
-    if (isLoading) {
-        return <div>Loading...</div>;
-    }
+  useEffect(() => {
+    dispatch(validateUser());
+  }, [dispatch]);
 
-    return (
-        <Routes>
-            <Route
-                path="/"
-                element={
-                    <RequireAuth>
-                        <Home />
-                    </RequireAuth>
-                }
-            />
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
-            <Route
-                path="/login"
-                element={<Login />}
-            />
-            <Route
-                path="/test"
-                element={
-                    <RequireAuth>
-                        <ReduxTest />
-                    </RequireAuth>
-                }
-            />
-        </Routes>
-    );
+  return (
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <RequireAuth>
+            <Home />
+          </RequireAuth>
+        }
+      />
+      <Route path="/login" element={<Login />} />
+    </Routes>
+  );
 };
 
 export default App;
