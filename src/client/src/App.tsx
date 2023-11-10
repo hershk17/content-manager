@@ -1,37 +1,17 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Route, Routes } from "react-router-dom";
-import RequireAuth from "./components/RequireAuth";
-import Login from "./features/auth/Login";
-import { validateUser } from "./features/auth/authSlice";
-import Home from "./features/library/Library";
-import { AppDispatch, RootState } from "./stores/store";
+import { CssBaseline } from "@mui/material";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import ThemeProvider from "./providers/ThemeProvider";
+import Router from "./router";
 
-const App = () => {
-  const dispatch = useDispatch<AppDispatch>();
-  const isLoading = useSelector((state: RootState) => state.auth.isLoading);
-
-  useEffect(() => {
-    dispatch(validateUser());
-  }, [dispatch]);
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
+function App() {
   return (
-    <Routes>
-      <Route
-        path="/"
-        element={
-          <RequireAuth>
-            <Home />
-          </RequireAuth>
-        }
-      />
-      <Route path="/login" element={<Login />} />
-    </Routes>
+    <ThemeProvider>
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <CssBaseline />
+        <Router />
+      </LocalizationProvider>
+    </ThemeProvider>
   );
-};
-
+}
 export default App;
