@@ -1,3 +1,4 @@
+import { faker } from "@faker-js/faker";
 import DeleteTwoToneIcon from "@mui/icons-material/DeleteTwoTone";
 import EditTwoToneIcon from "@mui/icons-material/EditTwoTone";
 import {
@@ -24,11 +25,10 @@ import axios from "axios";
 import { ChangeEvent, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useSelector } from "react-redux";
+import Label from "../../../components/Label";
 import PageTitleWrapper from "../../../components/PageTitleWrapper";
 import Game from "../../../models/Game";
-import { RootState } from "../../../stores/Store";
-import { faker } from "@faker-js/faker";
-import Label from "../../../components/Label";
+import { RootState } from "../../../stores/store";
 
 const getStatusLabel = (): JSX.Element => {
   const map = [

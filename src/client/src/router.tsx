@@ -3,7 +3,6 @@ import { Navigate } from "react-router-dom";
 
 import { Suspense, useEffect } from "react";
 import SuspenseLoader from "./components/SuspenseLoader";
-import BaseLayout from "./layouts/BaseLayout";
 import SidebarLayout from "./layouts/SidebarLayout";
 
 const Loader =
@@ -60,7 +59,7 @@ import Tooltips from "./features/template/Samples/Tooltips";
 import Transactions from "./features/template/Transactions";
 import UserProfile from "./features/user/Profile";
 import UserSettings from "./features/user/Settings";
-import { AppDispatch, RootState } from "./stores/Store";
+import { AppDispatch, RootState } from "./stores/store";
 
 function router() {
   const dispatch = useDispatch<AppDispatch>();

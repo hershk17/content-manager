@@ -1,10 +1,7 @@
-import FacebookIcon from "@mui/icons-material/Facebook";
 import GoogleIcon from "@mui/icons-material/Google";
-import TwitterIcon from "@mui/icons-material/Twitter";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { LoadingButton } from "@mui/lab";
 import {
-  Box,
   Button,
   Card,
   Divider,
@@ -13,13 +10,13 @@ import {
   Link,
   Stack,
   TextField,
-  Typography,
+  Typography
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { RootState } from "../../../stores/Store";
-import { Helmet } from "react-helmet-async";
+import { RootState } from "../../../stores/store";
 
 const Login = () => {
   const isAuthenticated = useSelector((state: RootState) => state.auth.user);

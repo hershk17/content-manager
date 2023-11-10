@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 import { NavLink } from "react-router-dom";
 
@@ -10,11 +10,10 @@ import {
   Hidden,
   lighten,
   List,
-  ListItem,
   ListItemButton,
   ListItemText,
   Popover,
-  Typography,
+  Typography
 } from "@mui/material";
 
 import AccountBoxTwoToneIcon from "@mui/icons-material/AccountBoxTwoTone";
@@ -24,8 +23,8 @@ import InboxTwoToneIcon from "@mui/icons-material/InboxTwoTone";
 import LockOpenTwoToneIcon from "@mui/icons-material/LockOpenTwoTone";
 import { styled } from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
-import { logout, validateUser } from "../../../../features/auth/authSlice";
-import { AppDispatch, RootState } from "../../../../stores/Store";
+import { logout } from "../../../../features/auth/authSlice";
+import { AppDispatch, RootState } from "../../../../stores/store";
 
 const UserBoxButton = styled(Button)(
   ({ theme }) => `

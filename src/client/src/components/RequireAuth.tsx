@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
-import { RootState } from "../stores/Store";
 import Login from "../features/auth/Login";
+import { RootState } from "../stores/store";
 
 interface Props {
   children: React.ReactNode;

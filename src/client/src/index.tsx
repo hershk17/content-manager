@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import { SidebarProvider } from "./providers/SidebarProvider";
-import { Store } from "./stores/Store";
+import { store } from "./stores/store";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -15,7 +15,7 @@ root.render(
     <HelmetProvider>
       <SidebarProvider>
         <BrowserRouter>
-          <Provider store={Store}>
+          <Provider store={store}>
             <App />
           </Provider>
         </BrowserRouter>

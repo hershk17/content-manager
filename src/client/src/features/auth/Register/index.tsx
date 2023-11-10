@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { RootState } from "../../../stores/Store";
+import { RootState } from "../../../stores/store";
 
 const Register = () => {
   const isAuthenticated = useSelector((state: RootState) => state.auth.user);
