@@ -1,16 +1,20 @@
-import { useContext } from "react";
+import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
-import { AuthContext } from "../providers/AuthProvider";
+import { RootState } from "../stores/Store";
+import Login from "../features/auth/Login";
 
 interface Props {
   children: React.ReactNode;
 }
 
 const RequireAuth = ({ children }: Props) => {
-  const { isAuthenticated } = useContext(AuthContext);
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.auth.isAuthenticated
+  );
 
   if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
+    return <Login />;
+    // return <Navigate to="/login" replace />;
   }
 
   return children;

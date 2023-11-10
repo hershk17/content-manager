@@ -1,30 +1,17 @@
-import { useContext } from "react";
-import { Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import { AuthContext } from "./providers/AuthProvider";
-import RequireAuth from "./components/RequireAuth";
+import { CssBaseline } from "@mui/material";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import ThemeProvider from "./providers/ThemeProvider";
+import Router from "./router";
 
-const App = () => {
-  const { isLoading } = useContext(AuthContext);
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
+function App() {
   return (
-    <Routes>
-      <Route
-        path="/"
-        element={
-          <RequireAuth>
-            <Home />
-          </RequireAuth>
-        }
-      />
-      <Route path="/login" element={<Login />} />
-    </Routes>
+    <ThemeProvider>
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <CssBaseline />
+        <Router />
+      </LocalizationProvider>
+    </ThemeProvider>
   );
-};
-
+}
 export default App;
