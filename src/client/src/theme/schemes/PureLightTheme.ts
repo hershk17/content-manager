@@ -1142,25 +1142,25 @@ export const PureLightTheme = createTheme({
     fontFamily:
       '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"',
     h1: {
-      fontWeight: 900,
+      fontWeight: 700,
       fontSize: 35,
     },
     h2: {
-      fontWeight: 900,
+      fontWeight: 700,
       fontSize: 30,
     },
     h3: {
-      fontWeight: 900,
+      fontWeight: 700,
       fontSize: 25,
       lineHeight: 1.4,
       color: colors.alpha.black[100],
     },
     h4: {
-      fontWeight: 900,
+      fontWeight: 700,
       fontSize: 20,
     },
     h5: {
-      fontWeight: 900,
+      fontWeight: 700,
       fontSize: 14,
     },
     h6: {
