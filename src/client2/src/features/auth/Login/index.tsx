@@ -1,10 +1,12 @@
 import {
+  Anchor,
   Box,
   Button,
+  Flex,
   Group,
   PasswordInput,
   Text,
-  TextInput
+  TextInput,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useState } from "react";
@@ -73,12 +75,17 @@ export const Login = () => {
         <title>Login</title>
       </Helmet>
       <Box maw={360} mx="auto">
-        <Text size="xl" fw={600} my="xl">
+        <Text size="xl" fw={600} mt="xl">
           Sign in to Nexus
-          <Text size="sm" c="dimmed" mt="xs">
-            Don't have an account? <Link to="register">Get started</Link>
-          </Text>
         </Text>
+        <Flex mb="xl" mt="xs">
+          <Text size="sm" c="dimmed">
+            Don't have an account?{" "}
+            <Anchor component={Link} to="register">
+              Get Started
+            </Anchor>
+          </Text>
+        </Flex>
         <form onSubmit={form.onSubmit((values) => console.log(values))}>
           <TextInput
             label="Email"
@@ -92,9 +99,9 @@ export const Login = () => {
             {...form.getInputProps("password")}
           />
           <Group justify="flex-end" mt="sm">
-            <Text size="sm" c="dimmed">
-              <Link to="forgot-password">Forgot password?</Link>
-            </Text>
+            <Anchor component={Link} to="forgot-password">
+              <Text size="sm">Forgot password?</Text>
+            </Anchor>
           </Group>
           <Button
             type="submit"

@@ -1,10 +1,10 @@
-import { createTheme, rem } from '@mantine/core';
+import { createTheme, rem } from "@mantine/core";
 
 export const theme = createTheme({
+  primaryColor: "violet",
   /** Put your mantine theme override here */
   colors: {
     // colors here
-
   },
 
   shadows: {
