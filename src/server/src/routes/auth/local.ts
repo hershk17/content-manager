@@ -3,26 +3,35 @@ import { Router } from "express";
 import JWT from "jsonwebtoken";
 import passport from "passport";
 import { IUser, User } from "../../models/user";
-import { registerSchema } from "../../services/validators";
+import { registerSchema } from "../../services/utils/validators";
 
 const router = Router();
 
-router.post("/login", passport.authenticate("local", { session: false }), (req, res) => {
-  if (req.isAuthenticated()) {
-    const user = req.user as IUser;
-    const token = JWT.sign(
-      {
-        expiresIn: "14d",
-        username: user.username,
-        email: user.email,
-        provider: user.provider,
-      },
-      process.env.JWT_SECRET!
-    );
-    res.cookie("x-auth-token", token, { maxAge: 14 * 24 * 60 * 60 * 1000 });
-    res.status(200).redirect(process.env.VITE_CLIENT_URL!);
+router.post(
+  "/login",
+  passport.authenticate("local", { session: false }),
+  (req, res) => {
+    if (req.isAuthenticated()) {
+      const user = req.user as IUser;
+      const token = JWT.sign(
+        {
+          expiresIn: "14d",
+          username: user.username,
+          email: user.email,
+          provider: user.provider,
+        },
+        process.env.JWT_SECRET!
+      );
+      res.cookie("x-auth-token", token, {
+        maxAge: 14 * 24 * 60 * 60 * 1000,
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+      });
+      res.status(200).send("Logged in successfully");
+    }
   }
-});
+);
 
 router.post("/register", async (req, res) => {
   const { error } = registerSchema.validate(req.body);

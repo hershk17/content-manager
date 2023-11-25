@@ -2,14 +2,7 @@ import { Request } from "express";
 import passport from "passport";
 import { Strategy as JwtStrategy } from "passport-jwt";
 import { User } from "../../models/user";
-
-const cookieExtractor = (req: Request) => {
-  let token = null;
-  if (req && (req.cookies || req.headers)) {
-    token = req.cookies["x-auth-token"] ?? req.headers["x-auth-token"];
-  }
-  return token;
-};
+import { cookieExtractor } from "../utils/cookie";
 
 // JWT strategy
 const jwtLogin = new JwtStrategy(

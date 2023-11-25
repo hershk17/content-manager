@@ -1,8 +1,8 @@
 import bcrypt from "bcrypt";
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
-import { loginSchema } from "../validators";
 import { User } from "../../models/user";
+import { loginSchema } from "../utils/validators";
 
 const localStrategy = new LocalStrategy(
   {
