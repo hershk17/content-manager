@@ -13,7 +13,10 @@ const steamStrategy = new SteamStrategy(
   async (req: Request, identifier: string, userData: IUser, done: Function) => {
     try {
       const user = req.user as IUser;
-      const updatedUser = await User.findOneAndUpdate({ username: user.username }, { steamId: userData.id });
+      const updatedUser = await User.findOneAndUpdate(
+        { username: user.username },
+        { steamId: userData.id }
+      );
       return done(null, updatedUser);
     } catch (err) {
       console.error(err);

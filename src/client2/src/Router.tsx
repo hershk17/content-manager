@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import {
   Navigate,
   RouterProvider,
@@ -8,13 +6,11 @@ import {
 import { RequireAuth } from "./components/RequireAuth";
 import { Login } from "./features/auth/Login";
 import { Register } from "./features/auth/Register";
-import { validateUser } from "./features/auth/authSlice";
 import { SteamLibrary } from "./features/library/SteamLibrary";
 import { Home } from "./features/status/Home";
 import { NotFound } from "./features/status/NotFound";
 import { BaseLayout } from "./layouts/BaseLayout";
 import { SidebarLayout } from "./layouts/SidebarLayout";
-import { AppDispatch, RootState } from "./stores/store";
 
 const router = createBrowserRouter([
   {
@@ -32,7 +28,12 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/home",
-        element: <Home />,
+        // element: <Home />,
+        element: (
+          <RequireAuth>
+            <Home />
+          </RequireAuth>
+        ),
       },
       {
         path: "/login",
@@ -63,17 +64,6 @@ const router = createBrowserRouter([
 ]);
 
 export function Router() {
-  const dispatch = useDispatch<AppDispatch>();
-  const isLoading = useSelector((state: RootState) => state.auth.isLoading);
-
-  useEffect(() => {
-    dispatch(validateUser());
-  }, [dispatch]);
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <RouterProvider
       router={router}

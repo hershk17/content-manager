@@ -1,31 +1,29 @@
-import { Anchor, Title, Text } from "@mantine/core";
-import { ColorSchemeToggle } from "../../../components/ColorSchemeToggle";
+import { Anchor, Text, Title } from "@mantine/core";
 
 import styles from "./styles.module.css";
 
 export const Home = () => {
   return (
     <>
-      <Title className={styles.title} ta="center" mt={100}>
-        Welcome to{" "}
+      <Title className={styles.title} ta="center" mt={60}>
+        Welcome to your <br />
         <Text
           inherit
           variant="gradient"
           component="span"
           gradient={{ from: "pink", to: "yellow" }}
         >
-          Mantine
+          Nexus Hub
         </Text>
       </Title>
       <Text c="dimmed" ta="center" size="lg" maw={580} mx="auto" mt="xl">
-        This starter Vite project includes a minimal setup, if you want to learn
-        more on Mantine + Vite integration follow{" "}
+        Nexus Hub is a platform for tracking, organizing, and managing all your
+        video game libraries in one place.{" "}
         <Anchor href="https://mantine.dev/guides/vite/" size="lg">
-          this guide
-        </Anchor>
-        . To get started edit pages/Home.page.tsx file.
+          Create an account
+        </Anchor>{" "}
+        to start managing your libraries.
       </Text>
-      <ColorSchemeToggle />
     </>
   );
 };

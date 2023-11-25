@@ -9,6 +9,7 @@ import {
   IconUserPlus,
 } from "@tabler/icons-react";
 import { Link, Outlet, useLocation } from "react-router-dom";
+import { ProfileOptions } from "./ProfileOptions";
 import { ThemeToggle } from "./ThemeToggle";
 
 const links = [
@@ -60,9 +61,8 @@ export const SidebarLayout = () => {
             <Text hiddenFrom="sm" size="xl">
               Nexus Hub
             </Text>
-            <Group grow>
-              <ThemeToggle />
-            </Group>
+            <ProfileOptions />
+            <ThemeToggle />
           </Group>
         </AppShell.Header>
 
@@ -83,7 +83,7 @@ export const SidebarLayout = () => {
         </AppShell.Navbar>
 
         <AppShell.Main className="content">
-            <Outlet />
+          <Outlet />
         </AppShell.Main>
       </AppShell>
     </>
