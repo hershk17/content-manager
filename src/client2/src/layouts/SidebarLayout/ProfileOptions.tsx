@@ -1,12 +1,14 @@
-import { Button, Menu, rem } from "@mantine/core";
+import { Button, Image, Menu, rem } from "@mantine/core";
 import {
+  IconChevronDown,
+  IconLogin2,
   IconMessageCircle,
-  IconPhoto,
   IconSettings,
   IconTrash,
   IconUser,
 } from "@tabler/icons-react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   authApi,
   useLogoutMutation,
@@ -15,19 +17,44 @@ import {
 
 export const ProfileOptions = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { data: user, isLoading } = useValidateQuery();
   const [logout] = useLogoutMutation();
 
-  if (isLoading) return null;
-
-  if (!user) return <div>Sign In Plz</div>;
+  if (isLoading || !user) {
+    return (
+      <Button
+        size="md"
+        variant="default"
+        radius="md"
+        rightSection={<IconLogin2 style={{ width: rem(16) }} />}
+        onClick={() => {
+          navigate("/login");
+        }}
+      >
+        Sign in
+      </Button>
+    );
+  }
 
   return (
     <Menu shadow="md" width={200}>
       <Menu.Target>
-        <Button size="lg" leftSection={<IconPhoto size={14} />}>
-          Toggle menu
+        <Button
+          size="md"
+          variant="default"
+          radius="md"
+          leftSection={
+            user.avatar ? (
+              <Image radius="xl" src={user.avatar} h={rem(25)} w={rem(25)} />
+            ) : (
+              <IconUser style={{ width: rem(25) }} />
+            )
+          }
+          rightSection={<IconChevronDown style={{ width: rem(16) }} />}
+        >
+          {user.name ? user.name : user.username}
         </Button>
       </Menu.Target>
 

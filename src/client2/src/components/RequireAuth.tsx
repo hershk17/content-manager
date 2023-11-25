@@ -12,8 +12,6 @@ export function RequireAuth({ children }: Props) {
     return <div>Loading...</div>;
   }
 
-  console.log(data);
-
   if (!data) {
     return <Login />;
   }

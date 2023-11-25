@@ -1,4 +1,4 @@
-import { AppShell, Burger, Group, NavLink, Text } from "@mantine/core";
+import { AppShell, Burger, Flex, Group, NavLink, Text } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import {
   IconDeviceGamepad2,
@@ -50,20 +50,24 @@ export const SidebarLayout = () => {
         padding="lg"
       >
         <AppShell.Header px="lg">
-          <Group h="100%">
-            <Burger
-              opened={opened}
-              onClick={toggle}
-              hiddenFrom="sm"
-              size="sm"
-              aria-label="Toggle navigation"
-            />
-            <Text hiddenFrom="sm" size="xl">
-              Nexus Hub
-            </Text>
-            <ProfileOptions />
-            <ThemeToggle />
-          </Group>
+          <Flex h="100%" justify="space-between">
+            <Group>
+              <Burger
+                opened={opened}
+                onClick={toggle}
+                hiddenFrom="sm"
+                size="sm"
+                aria-label="Toggle navigation"
+              />
+              <Text hiddenFrom="sm" size="xl">
+                Nexus Hub
+              </Text>
+            </Group>
+            <Group>
+              <ThemeToggle />
+              <ProfileOptions />
+            </Group>
+          </Flex>
         </AppShell.Header>
 
         <AppShell.Navbar>
