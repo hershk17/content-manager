@@ -8,42 +8,15 @@ import {
   rem,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import {
-  IconDeviceGamepad2,
-  IconError404,
-  IconHome,
-  IconLibrary,
-  IconLogin,
-  IconUserPlus,
-} from "@tabler/icons-react";
+import { IconDeviceGamepad2 } from "@tabler/icons-react";
 import { Link, Outlet, useLocation } from "react-router-dom";
-import { ProfileOptions } from "./ProfileOptions";
-import { ThemeToggle } from "./ThemeToggle";
-
-const links = [
-  { icon: IconHome, label: "Home", link: "/home" },
-  { icon: IconLogin, label: "Login", link: "/login" },
-  { icon: IconUserPlus, label: "Register", link: "/register" },
-  { icon: IconLibrary, label: "Library", link: "/steamLibrary" },
-  { icon: IconError404, label: "Not Found", link: "/404" },
-];
+import { NAV_LINKS } from "./components/NavLinks";
+import { ProfileOptions } from "./components/ProfileOptions";
+import { ThemeToggle } from "./components/ThemeToggle";
 
 export const SidebarLayout = () => {
   const [opened, { toggle }] = useDisclosure();
   const location = useLocation();
-
-  const navLinks = links.map((item, index) => (
-    <NavLink
-      component={Link}
-      to={item.link}
-      unstable_viewTransition
-      key={item.link}
-      label={item.label}
-      leftSection={<item.icon size="1rem" stroke={1.5} />}
-      active={location.pathname === item.link}
-      px="xl"
-    />
-  ));
 
   return (
     <AppShell
@@ -93,7 +66,18 @@ export const SidebarLayout = () => {
           <Title order={2}>Nexus Hub</Title>
         </Group>
 
-        {navLinks}
+        {NAV_LINKS.map((item) => (
+          <NavLink
+            component={Link}
+            to={item.link}
+            unstable_viewTransition
+            key={item.link}
+            label={item.label}
+            leftSection={<item.icon size="1rem" stroke={1.5} />}
+            active={location.pathname === item.link}
+            px="xl"
+          />
+        ))}
       </AppShell.Navbar>
 
       <AppShell.Main className="content">

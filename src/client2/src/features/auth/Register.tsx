@@ -19,7 +19,7 @@ import {
   IconUser,
 } from "@tabler/icons-react";
 import { Link, useNavigate } from "react-router-dom";
-import { useLoginMutation, useRegisterMutation } from "../authApi";
+import { useLoginMutation, useRegisterMutation } from "./authApi";
 
 interface FormProps {
   username: string;
@@ -98,7 +98,7 @@ export const Register = () => {
               color: "green",
               message: "Redirecting you to the dashboard...",
             });
-            navigate("/home");
+            navigate("/library");
           })
           .catch((response) => {
             notifications.show({

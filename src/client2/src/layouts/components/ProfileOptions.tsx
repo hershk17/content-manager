@@ -10,10 +10,10 @@ import {
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
-  authApi,
   useLogoutMutation,
   useValidateQuery,
 } from "../../features/auth/authApi";
+import { baseApi } from "../../stores/store";
 
 export const ProfileOptions = () => {
   const dispatch = useDispatch();
@@ -87,7 +87,7 @@ export const ProfileOptions = () => {
           }
           onClick={() => {
             logout().then(() => {
-              dispatch(authApi.util.resetApiState());
+              dispatch(baseApi.util.resetApiState());
             });
           }}
         >

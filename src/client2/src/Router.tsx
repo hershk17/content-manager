@@ -6,8 +6,8 @@ import {
 import { RequireAuth } from "./components/RequireAuth";
 import { Login } from "./features/auth/Login";
 import { Register } from "./features/auth/Register";
+import { Home } from "./features/dashboard/Home";
 import { SteamLibrary } from "./features/library/SteamLibrary";
-import { Home } from "./features/status/Home";
 import { NotFound } from "./features/status/NotFound";
 import { BaseLayout } from "./layouts/BaseLayout";
 import { SidebarLayout } from "./layouts/SidebarLayout";
@@ -28,12 +28,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/home",
-        // element: <Home />,
-        element: (
-          <RequireAuth>
-            <Home />
-          </RequireAuth>
-        ),
+        element: <Home />,
       },
       {
         path: "/login",
@@ -44,7 +39,7 @@ const router = createBrowserRouter([
         element: <Register />,
       },
       {
-        path: "/steamLibrary",
+        path: "/library",
         element: (
           <RequireAuth>
             <SteamLibrary />

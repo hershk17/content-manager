@@ -15,7 +15,7 @@ import { useDocumentTitle } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
 import { IconAt, IconBrandGoogleFilled, IconLock } from "@tabler/icons-react";
 import { Link, useNavigate } from "react-router-dom";
-import { useLoginMutation } from "../authApi";
+import { useLoginMutation } from "./authApi";
 
 interface FormProps {
   email: string;
@@ -65,7 +65,7 @@ export const Login = () => {
           color: "green",
           message: "Redirecting you to the dashboard...",
         });
-        navigate("/home");
+        navigate("/library");
       })
       .catch((response) => {
         notifications.show({
