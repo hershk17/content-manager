@@ -1,13 +1,4 @@
-import {
-  AppShell,
-  Box,
-  Burger,
-  Flex,
-  Grid,
-  Group,
-  NavLink,
-  Text,
-} from "@mantine/core";
+import { AppShell, Burger, Group, NavLink, Text } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import {
   IconDeviceGamepad2,
@@ -36,6 +27,7 @@ export const SidebarLayout = () => {
     <NavLink
       component={Link}
       to={item.link}
+      unstable_viewTransition
       key={item.link}
       label={item.label}
       leftSection={<item.icon size="1rem" stroke={1.5} />}
@@ -90,8 +82,8 @@ export const SidebarLayout = () => {
           {navLinks}
         </AppShell.Navbar>
 
-        <AppShell.Main>
-          <Outlet />
+        <AppShell.Main className="content">
+            <Outlet />
         </AppShell.Main>
       </AppShell>
     </>

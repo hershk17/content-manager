@@ -81,7 +81,7 @@ export const Login = () => {
         <Flex mb="xl" mt="xs">
           <Text size="sm" c="dimmed">
             Don't have an account?{" "}
-            <Anchor component={Link} to="register">
+            <Anchor component={Link} to="/register">
               Get Started
             </Anchor>
           </Text>
@@ -99,7 +99,7 @@ export const Login = () => {
             {...form.getInputProps("password")}
           />
           <Group justify="flex-end" mt="sm">
-            <Anchor component={Link} to="forgot-password">
+            <Anchor component={Link} to="/forgot-password">
               <Text size="sm">Forgot password?</Text>
             </Anchor>
           </Group>
