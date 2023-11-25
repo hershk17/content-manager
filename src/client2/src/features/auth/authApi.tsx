@@ -37,9 +37,9 @@ export const authApi = createApi({
         url: "/register",
         method: "POST",
         body: credentials,
+        responseHandler: "text",
         credentials: "include",
       }),
-      invalidatesTags: ["User"],
     }),
     steam: builder.mutation({
       query: () => ({

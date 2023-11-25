@@ -1,4 +1,12 @@
-import { AppShell, Burger, Flex, Group, NavLink, Text } from "@mantine/core";
+import {
+  AppShell,
+  Burger,
+  Flex,
+  Group,
+  NavLink,
+  Title,
+  rem,
+} from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import {
   IconDeviceGamepad2,
@@ -38,40 +46,19 @@ export const SidebarLayout = () => {
   ));
 
   return (
-    <>
-      <AppShell
-        header={{ height: 70 }}
-        navbar={{
-          width: 300,
-          breakpoint: "sm",
-          collapsed: { mobile: !opened },
-        }}
-        layout="alt"
-        padding="lg"
-      >
-        <AppShell.Header px="lg">
-          <Flex h="100%" justify="space-between">
-            <Group>
-              <Burger
-                opened={opened}
-                onClick={toggle}
-                hiddenFrom="sm"
-                size="sm"
-                aria-label="Toggle navigation"
-              />
-              <Text hiddenFrom="sm" size="xl">
-                Nexus Hub
-              </Text>
-            </Group>
-            <Group>
-              <ThemeToggle />
-              <ProfileOptions />
-            </Group>
-          </Flex>
-        </AppShell.Header>
-
-        <AppShell.Navbar>
-          <Group py="xl" px="xl">
+    <AppShell
+      header={{ height: 70 }}
+      navbar={{
+        width: 300,
+        breakpoint: "sm",
+        collapsed: { mobile: !opened },
+      }}
+      layout="alt"
+      padding="lg"
+    >
+      <AppShell.Header px="lg">
+        <Flex h="100%" justify="space-between">
+          <Group>
             <Burger
               opened={opened}
               onClick={toggle}
@@ -79,17 +66,39 @@ export const SidebarLayout = () => {
               size="sm"
               aria-label="Toggle navigation"
             />
-            <IconDeviceGamepad2 />
-            <Text size="xl">Nexus Hub</Text>
+            <Title order={3} hiddenFrom="sm">
+              Nexus Hub
+            </Title>
           </Group>
+          <Group>
+            <ThemeToggle />
+            <ProfileOptions />
+          </Group>
+        </Flex>
+      </AppShell.Header>
 
-          {navLinks}
-        </AppShell.Navbar>
+      <AppShell.Navbar>
+        <Group py="xl" px="xl">
+          <Burger
+            opened={opened}
+            onClick={toggle}
+            hiddenFrom="sm"
+            size="sm"
+            aria-label="Toggle navigation"
+          />
+          <IconDeviceGamepad2
+            stroke={2}
+            style={{ height: rem(36), width: rem(36) }}
+          />
+          <Title order={2}>Nexus Hub</Title>
+        </Group>
 
-        <AppShell.Main className="content">
-          <Outlet />
-        </AppShell.Main>
-      </AppShell>
-    </>
+        {navLinks}
+      </AppShell.Navbar>
+
+      <AppShell.Main className="content">
+        <Outlet />
+      </AppShell.Main>
+    </AppShell>
   );
 };

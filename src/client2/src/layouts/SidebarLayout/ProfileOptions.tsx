@@ -54,7 +54,7 @@ export const ProfileOptions = () => {
           }
           rightSection={<IconChevronDown style={{ width: rem(16) }} />}
         >
-          {user.name ? user.name : user.username}
+          {user.name}
         </Button>
       </Menu.Target>
 
