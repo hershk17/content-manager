@@ -1,11 +1,24 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { authSlice } from "../features/auth/authSlice";
+import {
+  createApi,
+  fetchBaseQuery,
+  setupListeners,
+} from "@reduxjs/toolkit/dist/query/react";
+
+const API_URL = import.meta.env.VITE_SERVER_URL;
+
+export const baseApi = createApi({
+  baseQuery: fetchBaseQuery({ baseUrl: API_URL }),
+  endpoints: () => ({}),
+  tagTypes: ["User"],
+});
 
 export const store = configureStore({
   reducer: {
-    auth: authSlice.reducer,
+    [baseApi.reducerPath]: baseApi.reducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(baseApi.middleware),
 });
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+setupListeners(store.dispatch);

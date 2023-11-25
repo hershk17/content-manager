@@ -1,22 +1,20 @@
-import { useSelector } from "react-redux";
-import Login from "../features/auth/Login";
-import { RootState } from "../stores/store";
+import { Login } from "../features/auth/Login";
+import { useValidateQuery } from "../features/auth/authApi";
 
 interface Props {
   children: React.ReactNode;
 }
 
-const RequireAuth = ({ children }: Props) => {
-  const isAuthenticated = useSelector(
-    (state: RootState) => state.auth.isAuthenticated
-  );
+export function RequireAuth({ children }: Props) {
+  const { data, isFetching, isLoading } = useValidateQuery();
 
-  if (!isAuthenticated) {
+  if (isFetching || isLoading) {
+    return null;
+  }
+
+  if (!data) {
     return <Login />;
-    // return <Navigate to="/login" replace />;
   }
 
   return children;
-};
-
-export default RequireAuth;
+}

@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import {
   useLogoutMutation,
   useValidateQuery,
-} from "../../features/auth/authApi";
+} from "../../../../client/src/features/auth/authApi";
 import { baseApi } from "../../stores/store";
 
 export const ProfileOptions = () => {

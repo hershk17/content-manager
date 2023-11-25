@@ -1,4 +1,4 @@
-interface User {
+export default interface User {
   username: string; // UNIQUE IDENTIFIER
   email: string;
   password: string;
@@ -10,5 +10,3 @@ interface User {
   facebookId: string;
   twitterId: string;
 }
-
-export default User;

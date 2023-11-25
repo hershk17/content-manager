@@ -1,17 +1,20 @@
-import { CssBaseline } from "@mui/material";
-import { LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import ThemeProvider from "./providers/ThemeProvider";
-import Router from "./router";
+import { MantineProvider } from "@mantine/core";
+import "@mantine/core/styles.css";
+import { Notifications } from "@mantine/notifications";
+import { NavigationProgress } from "@mantine/nprogress";
+import { Provider } from "react-redux";
+import { Router } from "./router";
+import { store } from "./stores/store";
+import { theme } from "./theme";
 
-function App() {
+export const App = () => {
   return (
-    <ThemeProvider>
-      <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <CssBaseline />
+    <MantineProvider theme={theme}>
+      <Provider store={store}>
+        <NavigationProgress />
+        <Notifications />
         <Router />
-      </LocalizationProvider>
-    </ThemeProvider>
+      </Provider>
+    </MantineProvider>
   );
-}
-export default App;
+};
