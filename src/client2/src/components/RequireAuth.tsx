@@ -9,7 +9,7 @@ export function RequireAuth({ children }: Props) {
   const { data, isFetching, isLoading } = useValidateQuery();
 
   if (isFetching || isLoading) {
-    return <div>Loading...</div>;
+    return null;
   }
 
   if (!data) {
