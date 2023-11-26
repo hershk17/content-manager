@@ -14,8 +14,7 @@
     "build:client": "cd src/client && npm run build",
     "build:server": "cd src/server && npm run build",
     "build": "npm run build:client && npm run build:server",
-    "prepare": "husky install .husky",
-    "precommit": "npx lint-staged"
+    "prepare": "husky install .husky"
   },
   "keywords": [],
   "license": "ISC",

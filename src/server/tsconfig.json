@@ -1,15 +1,16 @@
 {
   "compilerOptions": {
-    "forceConsistentCasingInFileNames": true,
+    "outDir": "./build",
+    "sourceMap": true,
+    "target": "esnext",
     "module": "commonjs",
     "esModuleInterop": true,
-    "outDir": "./build",
-    "rootDir": "./src",
-    "target": "es6",
-    "skipLibCheck": true,
-    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true
-  }
-  // "exclude": ["./coverage", "./dist", "__tests__", "jest.config.js"]
+    "strict": true,
+    "skipLibCheck": true
+  },
+  "include": ["./*.js", "src/**/*.ts"],
+  "exclude": ["./build", "__tests__", "jest.config.js"]
 }

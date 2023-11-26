@@ -26,8 +26,6 @@ router.get(
       res.cookie("x-auth-token", token, {
         maxAge: 14 * 24 * 60 * 60 * 1000,
         httpOnly: true,
-        secure: true,
-        sameSite: "none",
       });
       res.status(200).redirect(process.env.VITE_CLIENT_URL!);
     }
