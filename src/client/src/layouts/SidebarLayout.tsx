@@ -51,7 +51,7 @@ export const SidebarLayout = () => {
       </AppShell.Header>
 
       <AppShell.Navbar>
-        <Group py="xl" px="xl">
+        <Group py="xl" px="xl" my="md">
           <Burger
             opened={opened}
             onClick={toggle}
@@ -76,6 +76,7 @@ export const SidebarLayout = () => {
             leftSection={<item.icon size="1rem" stroke={1.5} />}
             active={location.pathname === item.link}
             px="xl"
+            py="md"
           />
         ))}
       </AppShell.Navbar>
