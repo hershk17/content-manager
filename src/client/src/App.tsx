@@ -1,11 +1,15 @@
 import { MantineProvider } from "@mantine/core";
-import "@mantine/core/styles.css";
 import { Notifications } from "@mantine/notifications";
 import { NavigationProgress } from "@mantine/nprogress";
 import { Provider } from "react-redux";
-import { Router } from "./router";
-import { store } from "./stores/store";
-import { theme } from "./theme";
+
+import "@mantine/core/styles.css";
+import "@mantine/notifications/styles.css";
+import "@mantine/nprogress/styles.css";
+
+import { Router } from "@/Router";
+import { theme } from "@/themes/baseTheme";
+import { store } from "@/stores/store";
 
 export const App = () => {
   return (

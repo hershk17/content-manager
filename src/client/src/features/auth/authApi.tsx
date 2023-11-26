@@ -1,5 +1,5 @@
-import { baseApi } from "../../../../client/src/stores/store";
-import User from "../../../../client/src/models/User";
+import User from "@/models/User";
+import { baseApi } from "@/stores/store";
 
 const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({

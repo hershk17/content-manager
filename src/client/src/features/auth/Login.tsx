@@ -15,7 +15,8 @@ import { useDocumentTitle } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
 import { IconAt, IconBrandGoogleFilled, IconLock } from "@tabler/icons-react";
 import { Link, useNavigate } from "react-router-dom";
-import { useLoginMutation } from "./authApi";
+
+import { useLoginMutation } from "@/features/auth/authApi";
 
 interface FormProps {
   email: string;

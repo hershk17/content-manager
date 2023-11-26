@@ -1,4 +1,4 @@
-import { Box, Button, Image, Text, Title, rem } from "@mantine/core";
+import { Box, Button, Image, Text, Title } from "@mantine/core";
 import { useDocumentTitle } from "@mantine/hooks";
 import { Link } from "react-router-dom";
 

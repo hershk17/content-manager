@@ -3,14 +3,16 @@ import {
   RouterProvider,
   createBrowserRouter,
 } from "react-router-dom";
-import { Login } from "../../client/src/features/auth/Login";
-import { Register } from "../../client/src/features/auth/Register";
-import { RequireAuth } from "./components/RequireAuth";
-import { Home } from "./features/dashboard/Home";
-import { SteamLibrary } from "./features/library/SteamLibrary";
-import { NotFound } from "./features/status/NotFound";
-import { BaseLayout } from "./layouts/BaseLayout";
-import { SidebarLayout } from "./layouts/SidebarLayout";
+
+import { LoaderTest } from "@/common/LoaderTest";
+import { RequireAuth } from "@/common/RequireAuth";
+import { Login } from "@/features/auth/Login";
+import { Register } from "@/features/auth/Register";
+import { Home } from "@/features/dashboard/Home";
+import { SteamLibrary } from "@/features/library/SteamLibrary";
+import { NotFound } from "@/features/status/NotFound";
+import { BaseLayout } from "@/layouts/BaseLayout";
+import { SidebarLayout } from "@/layouts/SidebarLayout";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +47,10 @@ const router = createBrowserRouter([
             <SteamLibrary />
           </RequireAuth>
         ),
+      },
+      {
+        path: "/test",
+        element: <LoaderTest />,
       },
       {
         path: "/404",

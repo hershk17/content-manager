@@ -1,7 +1,7 @@
 import { Button, Group } from "@mantine/core";
 import { nprogress, NavigationProgress } from "@mantine/nprogress";
 
-export default function LoaderTest() {
+export const LoaderTest = () => {
   return (
     <>
       <NavigationProgress />
@@ -16,4 +16,4 @@ export default function LoaderTest() {
       </Group>
     </>
   );
-}
+};

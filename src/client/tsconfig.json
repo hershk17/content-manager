@@ -8,6 +8,12 @@
     "outDir": "./dist",
     "types": ["node", "react", "react-dom", "vite/client"],
 
+    /* Aliases */
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*", "./dist/*", ""]
+    },
+
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,

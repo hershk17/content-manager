@@ -2,10 +2,6 @@ import { createTheme, rem } from "@mantine/core";
 
 export const theme = createTheme({
   primaryColor: "violet",
-  /** Put your mantine theme override here */
-  colors: {
-    // colors here
-  },
 
   shadows: {
     md: "1px 1px 3px rgba(0, 0, 0, .25)",

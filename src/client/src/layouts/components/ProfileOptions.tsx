@@ -1,4 +1,4 @@
-import { Button, Image, Menu, rem } from "@mantine/core";
+import { Avatar, Button, Menu, rem } from "@mantine/core";
 import {
   IconChevronDown,
   IconLogin2,
@@ -9,11 +9,12 @@ import {
 } from "@tabler/icons-react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+
 import {
   useLogoutMutation,
   useValidateQuery,
-} from "../../../../client/src/features/auth/authApi";
-import { baseApi } from "../../stores/store";
+} from "@/features/auth/authApi";
+import { baseApi } from "@/stores/store";
 
 export const ProfileOptions = () => {
   const dispatch = useDispatch();
@@ -46,11 +47,14 @@ export const ProfileOptions = () => {
           variant="default"
           radius="md"
           leftSection={
-            user.avatar ? (
-              <Image radius="xl" src={user.avatar} h={rem(25)} w={rem(25)} />
-            ) : (
-              <IconUser style={{ width: rem(25) }} />
-            )
+            <Avatar
+              src={user.avatar}
+              alt="Profile Picture"
+              size="sm"
+              color="violet"
+            >
+              {user.name.substring(0, 2).toUpperCase()}
+            </Avatar>
           }
           rightSection={<IconChevronDown style={{ width: rem(16) }} />}
         >
@@ -60,31 +64,23 @@ export const ProfileOptions = () => {
 
       <Menu.Dropdown>
         <Menu.Label>Manage Account</Menu.Label>
-        <Menu.Item
-          leftSection={<IconUser style={{ width: rem(14), height: rem(14) }} />}
-        >
+        <Menu.Item leftSection={<IconUser width={rem(16)} height={rem(16)} />}>
           Profile
         </Menu.Item>
         <Menu.Item
-          leftSection={
-            <IconMessageCircle style={{ width: rem(14), height: rem(14) }} />
-          }
+          leftSection={<IconMessageCircle width={rem(16)} height={rem(16)} />}
         >
           Messages
         </Menu.Item>
         <Menu.Item
-          leftSection={
-            <IconSettings style={{ width: rem(14), height: rem(14) }} />
-          }
+          leftSection={<IconSettings width={rem(16)} height={rem(16)} />}
         >
           Settings
         </Menu.Item>
         <Menu.Divider />
         <Menu.Item
           color="red"
-          leftSection={
-            <IconTrash style={{ width: rem(14), height: rem(14) }} />
-          }
+          leftSection={<IconTrash width={rem(16)} height={rem(16)} />}
           onClick={() => {
             logout().then(() => {
               dispatch(baseApi.util.resetApiState());

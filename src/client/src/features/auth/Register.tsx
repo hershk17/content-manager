@@ -19,7 +19,8 @@ import {
   IconUser,
 } from "@tabler/icons-react";
 import { Link, useNavigate } from "react-router-dom";
-import { useLoginMutation, useRegisterMutation } from "./authApi";
+
+import { useLoginMutation, useRegisterMutation } from "@/features/auth/authApi";
 
 interface FormProps {
   username: string;

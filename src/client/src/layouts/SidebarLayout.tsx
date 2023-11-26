@@ -10,9 +10,10 @@ import {
 import { useDisclosure } from "@mantine/hooks";
 import { IconDeviceGamepad2 } from "@tabler/icons-react";
 import { Link, Outlet, useLocation } from "react-router-dom";
-import { NAV_LINKS } from "./components/NavLinks";
-import { ProfileOptions } from "./components/ProfileOptions";
-import { ThemeToggle } from "./components/ThemeToggle";
+
+import { NAV_LINKS } from "@/common/NavLinks";
+import { ProfileOptions } from "@/layouts/components/ProfileOptions";
+import { ThemeToggle } from "@/layouts/components/ThemeToggle";
 
 export const SidebarLayout = () => {
   const [opened, { toggle }] = useDisclosure();
