@@ -14,7 +14,7 @@ import { useForm } from "@mantine/form";
 import { useDocumentTitle } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
 import { IconAt, IconBrandGoogleFilled, IconLock } from "@tabler/icons-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { useLoginMutation } from "@/features/auth/authApi";
 
@@ -27,8 +27,6 @@ export const Login = () => {
   useDocumentTitle("Login | Nexus");
 
   const API_URL = import.meta.env.VITE_SERVER_URL;
-  const navigate = useNavigate();
-
   const [loginUser] = useLoginMutation();
 
   const form = useForm<FormProps>({
@@ -64,9 +62,8 @@ export const Login = () => {
         notifications.show({
           title: "Logged in successfully",
           color: "green",
-          message: "Redirecting you to the dashboard...",
+          message: "Welcome back!",
         });
-        navigate("/library");
       })
       .catch((response) => {
         notifications.show({

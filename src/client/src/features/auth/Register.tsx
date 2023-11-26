@@ -18,7 +18,7 @@ import {
   IconLock,
   IconUser,
 } from "@tabler/icons-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { useLoginMutation, useRegisterMutation } from "@/features/auth/authApi";
 
@@ -33,9 +33,6 @@ export const Register = () => {
   useDocumentTitle("Register | Nexus");
 
   const API_URL = import.meta.env.VITE_SERVER_URL;
-
-  const navigate = useNavigate();
-
   const [loginUser] = useLoginMutation();
   const [registerUser] = useRegisterMutation();
 
@@ -97,9 +94,8 @@ export const Register = () => {
             notifications.show({
               title: "Registered successfully",
               color: "green",
-              message: "Redirecting you to the dashboard...",
+              message: "Welcome back!",
             });
-            navigate("/library");
           })
           .catch((response) => {
             notifications.show({
