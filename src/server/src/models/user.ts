@@ -35,14 +35,14 @@ export interface TestUser extends Document {
               unlocked: boolean;
               dateUnlocked: Date;
             };
-          }
+          },
         ];
         review: {
           score: number;
           description: string;
           lastUpdated: Date;
         };
-      }
+      },
     ];
   };
 }

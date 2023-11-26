@@ -184,8 +184,7 @@ export const Register = () => {
         leftSection={<IconBrandGoogleFilled size={14} />}
         size="md"
         fullWidth
-        onClick={handleGoogleRegister}
-      >
+        onClick={handleGoogleRegister}>
         Sign in with Google
       </Button>
     </Box>

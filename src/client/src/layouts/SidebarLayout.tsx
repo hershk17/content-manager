@@ -28,8 +28,7 @@ export const SidebarLayout = () => {
         collapsed: { mobile: !opened },
       }}
       layout="alt"
-      padding="lg"
-    >
+      padding="lg">
       <AppShell.Header px="lg">
         <Flex h="100%" justify="space-between">
           <Group>

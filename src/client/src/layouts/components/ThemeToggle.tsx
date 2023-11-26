@@ -11,8 +11,7 @@ export const ThemeToggle = () => {
         size="lg"
         radius="md"
         aria-label="Toggle light mode"
-        onClick={() => setColorScheme("light")}
-      >
+        onClick={() => setColorScheme("light")}>
         <IconSun style={{ width: "70%", height: "70%" }} stroke={1.5} />
       </ActionIcon>
     </Tooltip>
@@ -23,8 +22,7 @@ export const ThemeToggle = () => {
         size="lg"
         radius="md"
         aria-label="Toggle dark mode"
-        onClick={() => setColorScheme("dark")}
-      >
+        onClick={() => setColorScheme("dark")}>
         <IconMoon style={{ width: "70%", height: "70%" }} stroke={1.5} />
       </ActionIcon>
     </Tooltip>

@@ -10,10 +10,7 @@ import {
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import {
-  useLogoutMutation,
-  useValidateQuery,
-} from "@/features/auth/authApi";
+import { useLogoutMutation, useValidateQuery } from "@/features/auth/authApi";
 import { baseApi } from "@/stores/store";
 
 export const ProfileOptions = () => {
@@ -32,8 +29,7 @@ export const ProfileOptions = () => {
         rightSection={<IconLogin2 style={{ width: rem(16) }} />}
         onClick={() => {
           navigate("/login");
-        }}
-      >
+        }}>
         Sign in
       </Button>
     );
@@ -51,13 +47,11 @@ export const ProfileOptions = () => {
               src={user.avatar}
               alt="Profile Picture"
               size="sm"
-              color="violet"
-            >
+              color="violet">
               {user.name.substring(0, 2).toUpperCase()}
             </Avatar>
           }
-          rightSection={<IconChevronDown style={{ width: rem(16) }} />}
-        >
+          rightSection={<IconChevronDown style={{ width: rem(16) }} />}>
           {user.name}
         </Button>
       </Menu.Target>
@@ -68,13 +62,11 @@ export const ProfileOptions = () => {
           Profile
         </Menu.Item>
         <Menu.Item
-          leftSection={<IconMessageCircle width={rem(16)} height={rem(16)} />}
-        >
+          leftSection={<IconMessageCircle width={rem(16)} height={rem(16)} />}>
           Messages
         </Menu.Item>
         <Menu.Item
-          leftSection={<IconSettings width={rem(16)} height={rem(16)} />}
-        >
+          leftSection={<IconSettings width={rem(16)} height={rem(16)} />}>
           Settings
         </Menu.Item>
         <Menu.Divider />
@@ -85,8 +77,7 @@ export const ProfileOptions = () => {
             logout().then(() => {
               dispatch(baseApi.util.resetApiState());
             });
-          }}
-        >
+          }}>
           Sign out
         </Menu.Item>
       </Menu.Dropdown>

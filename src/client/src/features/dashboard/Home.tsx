@@ -15,8 +15,7 @@ export const Home = () => {
           inherit
           variant="gradient"
           component="span"
-          gradient={{ from: "pink", to: "yellow" }}
-        >
+          gradient={{ from: "pink", to: "yellow" }}>
           Nexus Hub
         </Text>
       </Title>

@@ -7,7 +7,9 @@ import mongoose from "mongoose";
 import passport from "passport";
 import { resolve } from "path";
 
-dotenv.config({ path: resolve(process.cwd(), `./config/.env.${process.env.NODE_ENV}`) });
+dotenv.config({
+  path: resolve(process.cwd(), `./config/.env.${process.env.NODE_ENV}`),
+});
 
 import routes from "./routes";
 import "./services/passport";

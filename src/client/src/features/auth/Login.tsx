@@ -128,8 +128,7 @@ export const Login = () => {
         leftSection={<IconBrandGoogleFilled size={14} />}
         size="md"
         fullWidth
-        onClick={handleGoogleLogin}
-      >
+        onClick={handleGoogleLogin}>
         Sign in with Google
       </Button>
     </Box>
