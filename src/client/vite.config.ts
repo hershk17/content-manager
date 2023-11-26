@@ -1,4 +1,5 @@
 import react from "@vitejs/plugin-react-swc";
+import path from "path";
 import { defineConfig } from "vite";
 
 // ----------------------------------------------------------------------
@@ -6,9 +7,9 @@ import { defineConfig } from "vite";
 export default defineConfig({
   envDir: "./config",
   plugins: [react()],
-  test: {
-    globals: true,
-    environment: "jsdom",
-    setupFiles: ["./vitest.setup.ts"],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
   },
 });

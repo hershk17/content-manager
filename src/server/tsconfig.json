@@ -10,6 +10,6 @@
     "strict": true,
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true
-  },
+  }
   // "exclude": ["./coverage", "./dist", "__tests__", "jest.config.js"]
 }

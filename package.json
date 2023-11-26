@@ -13,7 +13,9 @@
     "install:global": "npm run install:client && npm run install:server",
     "build:client": "cd src/client && npm run build",
     "build:server": "cd src/server && npm run build",
-    "build": "npm run build:client && npm run build:server"
+    "build": "npm run build:client && npm run build:server",
+    "prepare": "husky install .husky",
+    "precommit": "npx lint-staged"
   },
   "keywords": [],
   "license": "ISC",
@@ -25,7 +27,14 @@
     "url": "https://github.com/hershk17/content-manager/issues"
   },
   "homepage": "https://github.com/hershk17/content-manager/issues#readme",
-  "dependencies": {
-    "concurrently": "^8.2.2"
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "husky": "^8.0.1",
+    "lint-staged": "^15.1.0"
+  },
+  "lint-staged": {
+    "*": [
+      "prettier --write"
+    ]
   }
 }

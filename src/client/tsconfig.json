@@ -1,17 +1,33 @@
 {
   "compilerOptions": {
-    "jsx": "react-jsx",
-    "forceConsistentCasingInFileNames": true,
-    "esModuleInterop": true,
-    "outDir": "./dist",
-    "rootDir": ".",
-    "target": "es2022",
-    "module": "es2022",
+    "target": "ESNext",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "module": "ESNext",
     "skipLibCheck": true,
-    "allowJs": true,
+    "rootDir": ".",
+    "outDir": "./dist",
+    "types": ["node", "react", "react-dom", "vite/client"],
+
+    /* Aliases */
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*", "./dist/*", ""]
+    },
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    /* Linting */
     "strict": true,
-    "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
-    "types": ["node", "react", "react-dom", "vite/client", "vitest/globals"]
-  }
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["src"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }
