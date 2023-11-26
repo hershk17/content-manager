@@ -1,16 +1,21 @@
+import Game from "@/models/Game";
 import { baseApi } from "@/stores/store";
+
+interface SteamLibraryResponse {
+  game_count: number;
+  games: Game[];
+}
 
 const libraryApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    steam: builder.mutation({
+    steamLibrary: builder.query<SteamLibraryResponse, void>({
       query: () => ({
-        url: "/auth/steam",
+        url: "/library/steam",
         method: "GET",
         credentials: "include",
       }),
-      invalidatesTags: ["User"],
     }),
   }),
 });
 
-export const { useSteamMutation } = libraryApi;
+export const { useSteamLibraryQuery } = libraryApi;

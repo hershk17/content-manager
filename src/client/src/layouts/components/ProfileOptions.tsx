@@ -51,28 +51,24 @@ export const ProfileOptions = () => {
               {user.name.substring(0, 2).toUpperCase()}
             </Avatar>
           }
-          rightSection={<IconChevronDown style={{ width: rem(16) }} />}>
+          rightSection={<IconChevronDown size="1rem" />}>
           {user.name}
         </Button>
       </Menu.Target>
 
       <Menu.Dropdown>
         <Menu.Label>Manage Account</Menu.Label>
-        <Menu.Item leftSection={<IconUser width={rem(16)} height={rem(16)} />}>
-          Profile
-        </Menu.Item>
-        <Menu.Item
-          leftSection={<IconMessageCircle width={rem(16)} height={rem(16)} />}>
+        <Menu.Item leftSection={<IconUser size="1rem" />}>Profile</Menu.Item>
+        <Menu.Item leftSection={<IconMessageCircle size="1rem" />}>
           Messages
         </Menu.Item>
-        <Menu.Item
-          leftSection={<IconSettings width={rem(16)} height={rem(16)} />}>
+        <Menu.Item leftSection={<IconSettings size="1rem" />}>
           Settings
         </Menu.Item>
         <Menu.Divider />
         <Menu.Item
           color="red"
-          leftSection={<IconTrash width={rem(16)} height={rem(16)} />}
+          leftSection={<IconTrash size="1rem" />}
           onClick={() => {
             logout().then(() => {
               dispatch(baseApi.util.resetApiState());
