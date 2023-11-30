@@ -22,7 +22,11 @@ export const Home = () => {
       <Text c="dimmed" ta="center" size="lg" maw={580} mx="auto" mt="xl">
         Nexus Hub is a platform for tracking, organizing, and managing all your
         video game libraries in one place.{" "}
-        <Anchor component={Link} to="/register" size="lg">
+        <Anchor
+          component={Link}
+          to="/register"
+          size="lg"
+          unstable_viewTransition>
           Create an account
         </Anchor>{" "}
         to start managing your libraries.

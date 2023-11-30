@@ -3,11 +3,8 @@ import { useDocumentTitle } from "@mantine/hooks";
 import { IconBrandSteam } from "@tabler/icons-react";
 
 import { useValidateQuery } from "@/features/auth/authApi";
-import { GameCard } from "@/features/library/GameCard";
+import { LibraryCard } from "@/features/library/LibraryCard";
 import { useSteamLibraryQuery } from "@/features/library/libraryApi";
-import { useCallback, useEffect, useState } from "react";
-
-import { Embla } from "@mantine/carousel";
 
 export const SteamLibrary = () => {
   useDocumentTitle("Library | Nexus");
@@ -17,25 +14,10 @@ export const SteamLibrary = () => {
     window.location.href = `${API_URL}/auth/steam`;
   };
 
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [embla, setEmbla] = useState<Embla | null>(null);
-
-  const handleScroll = useCallback(() => {
-    if (!embla) return;
-    const progress = Math.max(0, Math.min(1, embla.scrollProgress()));
-    setScrollProgress(progress * 100);
-  }, [embla, setScrollProgress]);
-
-  useEffect(() => {
-    if (embla) {
-      embla.on("scroll", handleScroll);
-      handleScroll();
-    }
-  }, [embla]);
-
   const { data: user } = useValidateQuery();
 
   if (!user?.steamId) {
+    // TODO: replace this with a link/anchor
     return (
       <Button
         variant="outline"
@@ -50,7 +32,7 @@ export const SteamLibrary = () => {
     useSteamLibraryQuery();
 
   if (isLoadingGames) {
-    return <Box>Fetching...</Box>;
+    return <Box>Loading...</Box>;
   }
 
   if (steamGames?.game_count === 0) {
@@ -95,23 +77,23 @@ export const SteamLibrary = () => {
   return (
     <Stack my="lg" mx="auto" px="lg" maw={1600}>
       <Title order={1}>Recently Played</Title>
-      <Flex gap="md">
+      <Flex gap="xl" mb="xl">
         {getRecentlyPlayedGames().map((game) => (
-          <GameCard key={game.appid} game={game} />
+          <LibraryCard key={game.appid} game={game} />
         ))}
       </Flex>
 
       <Title order={1}>Most Played</Title>
-      <Flex gap="md">
+      <Flex gap="xl" mb="xl">
         {getMostPlayedgames().map((game) => (
-          <GameCard key={game.appid} game={game} />
+          <LibraryCard key={game.appid} game={game} />
         ))}
       </Flex>
 
       <Title order={1}>All Games</Title>
-      <Flex gap="md">
+      <Flex gap="xl" mb="xl">
         {getAlphabeticalGames().map((game) => (
-          <GameCard key={game.appid} game={game} />
+          <LibraryCard key={game.appid} game={game} />
         ))}
       </Flex>
     </Stack>

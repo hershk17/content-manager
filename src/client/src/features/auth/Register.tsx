@@ -123,7 +123,7 @@ export const Register = () => {
       </Title>
       <Text c="dimmed" mb="xl">
         Already have an account?{" "}
-        <Anchor component={Link} to="/register">
+        <Anchor component={Link} to="/register" unstable_viewTransition>
           Sign In
         </Anchor>
       </Text>

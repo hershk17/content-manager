@@ -82,7 +82,7 @@ export const Login = () => {
       </Title>
       <Text c="dimmed" mb="xl">
         Don't have an account?{" "}
-        <Anchor component={Link} to="/register">
+        <Anchor component={Link} to="/register" unstable_viewTransition>
           Get Started
         </Anchor>
       </Text>
@@ -111,7 +111,10 @@ export const Login = () => {
           {...form.getInputProps("password")}
         />
         <Group justify="flex-end" mt="sm">
-          <Anchor component={Link} to="/forgot-password">
+          <Anchor
+            component={Link}
+            to="/forgot-password"
+            unstable_viewTransition>
             <Text size="sm">Forgot password?</Text>
           </Anchor>
         </Group>

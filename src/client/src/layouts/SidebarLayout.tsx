@@ -11,7 +11,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { IconDeviceGamepad2 } from "@tabler/icons-react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 
-import { NAV_LINKS } from "@/common/NavLinks";
+import { NAV_LINKS } from "@/layouts/components/NavLinks";
 import { ProfileOptions } from "@/layouts/components/ProfileOptions";
 import { ThemeToggle } from "@/layouts/components/ThemeToggle";
 
@@ -70,13 +70,13 @@ export const SidebarLayout = () => {
           <NavLink
             component={Link}
             to={item.link}
-            unstable_viewTransition
             key={item.link}
             label={item.label}
             leftSection={<item.icon size="1rem" stroke={1.5} />}
-            active={location.pathname === item.link}
+            active={location.pathname.includes(item.link)}
             px="xl"
             py="md"
+            unstable_viewTransition
           />
         ))}
       </AppShell.Navbar>

@@ -14,7 +14,12 @@ export const NotFound = () => {
         address, or the page has been moved to another URL. If you think this is
         an error contact support.
       </Text>
-      <Button component={Link} to="/home" size="md" mt="xl">
+      <Button
+        component={Link}
+        to="/home"
+        size="md"
+        mt="xl"
+        unstable_viewTransition>
         Return home
       </Button>
     </Box>
