@@ -25,3 +25,5 @@ yarn-error.log*
 .gitignore
 .dockerignore
 .gitkeep
+
+*.env*
