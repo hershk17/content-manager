@@ -14,10 +14,43 @@ import { Link, Outlet, useLocation } from "react-router-dom";
 import { NAV_LINKS } from "@/layouts/components/NavLinks";
 import { ProfileOptions } from "@/layouts/components/ProfileOptions";
 import { ThemeToggle } from "@/layouts/components/ThemeToggle";
+import { useValidateQuery } from "@/features/auth/authApi";
 
 export const SidebarLayout = () => {
   const [opened, { toggle }] = useDisclosure();
   const location = useLocation();
+
+  const { data: user, isFetching, isLoading } = useValidateQuery();
+
+  const NavLinks = () => {
+    if (isFetching || isLoading) {
+      return null;
+    }
+
+    return NAV_LINKS.map((item) => {
+      if (item.isProtected && !user) {
+        return null;
+      }
+
+      if (item.hiddenPostAuth && user) {
+        return null;
+      }
+
+      return (
+        <NavLink
+          component={Link}
+          to={item.link}
+          key={item.link}
+          label={item.label}
+          leftSection={<item.icon size="1rem" stroke={1.5} />}
+          active={location.pathname.includes(item.link)}
+          px="xl"
+          py="md"
+          unstable_viewTransition
+        />
+      );
+    });
+  };
 
   return (
     <AppShell
@@ -66,19 +99,7 @@ export const SidebarLayout = () => {
           <Title order={2}>Nexus Hub</Title>
         </Group>
 
-        {NAV_LINKS.map((item) => (
-          <NavLink
-            component={Link}
-            to={item.link}
-            key={item.link}
-            label={item.label}
-            leftSection={<item.icon size="1rem" stroke={1.5} />}
-            active={location.pathname.includes(item.link)}
-            px="xl"
-            py="md"
-            unstable_viewTransition
-          />
-        ))}
+        {NavLinks()}
       </AppShell.Navbar>
 
       <AppShell.Main className="content">

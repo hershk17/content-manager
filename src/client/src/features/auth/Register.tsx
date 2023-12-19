@@ -18,7 +18,7 @@ import {
   IconLock,
   IconUser,
 } from "@tabler/icons-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { useLoginMutation, useRegisterMutation } from "@/features/auth/authApi";
 
@@ -35,6 +35,8 @@ export const Register = () => {
   const API_URL = import.meta.env.VITE_SERVER_URL;
   const [loginUser] = useLoginMutation();
   const [registerUser] = useRegisterMutation();
+
+  const navigate = useNavigate();
 
   const form = useForm<FormProps>({
     initialValues: {
@@ -91,6 +93,7 @@ export const Register = () => {
       .then(() => {
         loginUser(loginData)
           .then(() => {
+            navigate("/library");
             notifications.show({
               title: "Registered successfully",
               color: "green",

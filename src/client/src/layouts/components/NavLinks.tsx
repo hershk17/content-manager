@@ -9,11 +9,41 @@ import {
 } from "@tabler/icons-react";
 
 export const NAV_LINKS = [
-  { icon: IconHome, label: "Home", link: "/home" },
-  { icon: IconLogin, label: "Login", link: "/login" },
-  { icon: IconUserPlus, label: "Register", link: "/register" },
-  { icon: IconSearch, label: "Search", link: "/search" },
-  { icon: IconLibrary, label: "Library", link: "/library" },
-  { icon: IconTestPipe, label: "Loader Test", link: "/test" },
-  { icon: IconError404, label: "Not Found", link: "/404" },
+  {
+    icon: IconHome,
+    label: "Home",
+    link: "/home",
+    isProtected: false,
+    hiddenPostAuth: false,
+  },
+  {
+    icon: IconLogin,
+    label: "Login",
+    link: "/login",
+    isProtected: false,
+    hiddenPostAuth: true,
+  },
+  {
+    icon: IconUserPlus,
+    label: "Register",
+    link: "/register",
+    isProtected: false,
+    hiddenPostAuth: true,
+  },
+  {
+    icon: IconSearch,
+    label: "Search",
+    link: "/search",
+    isProtected: true,
+    hiddenPostAuth: false,
+  },
+  {
+    icon: IconLibrary,
+    label: "Library",
+    link: "/library",
+    isProtected: true,
+    hiddenPostAuth: false,
+  },
+  // { icon: IconTestPipe, label: "Loader Test", link: "/test" },
+  // { icon: IconError404, label: "Not Found", link: "/404" },
 ];

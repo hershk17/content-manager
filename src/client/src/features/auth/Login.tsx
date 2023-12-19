@@ -14,7 +14,7 @@ import { useForm } from "@mantine/form";
 import { useDocumentTitle } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
 import { IconAt, IconBrandGoogleFilled, IconLock } from "@tabler/icons-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { useLoginMutation } from "@/features/auth/authApi";
 
@@ -28,6 +28,8 @@ export const Login = () => {
 
   const API_URL = import.meta.env.VITE_SERVER_URL;
   const [loginUser] = useLoginMutation();
+
+  const navigate = useNavigate();
 
   const form = useForm<FormProps>({
     initialValues: {
@@ -59,6 +61,7 @@ export const Login = () => {
     loginUser(userData)
       .unwrap()
       .then(() => {
+        navigate("/library");
         notifications.show({
           title: "Logged in successfully",
           color: "green",
