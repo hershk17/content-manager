@@ -1,5 +1,6 @@
 import { Router } from "express";
 import authRoutes from "./auth";
+import gamesRoutes from "./games";
 import libraryRoutes from "./library";
 
 const router = Router();
@@ -10,6 +11,7 @@ router.get("/", (_req, res) => {
 });
 
 router.use("/auth", authRoutes);
+router.use("/games", gamesRoutes);
 router.use("/library", libraryRoutes);
 
 export default router;

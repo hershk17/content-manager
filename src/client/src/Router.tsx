@@ -13,6 +13,7 @@ import { SteamLibrary } from "@/features/library/SteamLibrary";
 import { NotFound } from "@/features/status/NotFound";
 import { BaseLayout } from "@/layouts/BaseLayout";
 import { SidebarLayout } from "@/layouts/SidebarLayout";
+import { GameDetails } from "./features/games/GameDetails";
 
 const router = createBrowserRouter([
   {
@@ -29,19 +30,19 @@ const router = createBrowserRouter([
     element: <SidebarLayout />,
     children: [
       {
-        path: "/home",
+        path: "home",
         element: <Home />,
       },
       {
-        path: "/login",
+        path: "login",
         element: <Login />,
       },
       {
-        path: "/register",
+        path: "register",
         element: <Register />,
       },
       {
-        path: "/library",
+        path: "library",
         element: (
           <RequireAuth>
             <SteamLibrary />
@@ -49,11 +50,19 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/test",
+        path: "games/:id",
+        element: (
+          <RequireAuth>
+            <GameDetails />
+          </RequireAuth>
+        ),
+      },
+      {
+        path: "test",
         element: <LoaderTest />,
       },
       {
-        path: "/404",
+        path: "404",
         element: <NotFound />,
       },
     ],
