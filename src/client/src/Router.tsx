@@ -14,6 +14,7 @@ import { NotFound } from "@/features/status/NotFound";
 import { BaseLayout } from "@/layouts/BaseLayout";
 import { SidebarLayout } from "@/layouts/SidebarLayout";
 import { GameDetails } from "./features/games/GameDetails";
+import { Search } from "./features/games/Search";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
       {
         path: "register",
         element: <Register />,
+      },
+      {
+        path: "search",
+        element: <Search />,
       },
       {
         path: "library",

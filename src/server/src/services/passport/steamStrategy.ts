@@ -5,8 +5,8 @@ import { IUser, User } from "../../models/user";
 
 const steamStrategy = new SteamStrategy(
   {
-    apiKey: process.env.STEAM_API_KEY,
-    realm: process.env.VITE_SERVER_URL,
+    apiKey: process.env.STEAM_API_KEY!,
+    realm: process.env.VITE_SERVER_URL!,
     returnURL: `${process.env.VITE_SERVER_URL}/auth/steam/callback`,
     passReqToCallback: true,
   },

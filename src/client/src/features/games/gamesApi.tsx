@@ -5,14 +5,20 @@ const gamesApi = baseApi.injectEndpoints({
     // TODO: add interface for game details
     gameDetails: builder.query<any, string>({
       query: (gameId) => ({
+        url: `/games/${gameId}`,
+        method: "GET",
+      }),
+    }),
+    gameSearch: builder.query<any, string>({
+      query: (searchQuery) => ({
         url: "/games",
         method: "GET",
         params: {
-          id: gameId,
+          search: searchQuery,
         },
       }),
     }),
   }),
 });
 
-export const { useGameDetailsQuery } = gamesApi;
+export const { useGameDetailsQuery, useLazyGameSearchQuery } = gamesApi;
