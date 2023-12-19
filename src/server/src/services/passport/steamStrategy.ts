@@ -10,7 +10,12 @@ const steamStrategy = new SteamStrategy(
     returnURL: `${process.env.VITE_SERVER_URL}/auth/steam/callback`,
     passReqToCallback: true,
   },
-  async (req: Request, identifier: string, userData: IUser, done: Function) => {
+  async (
+    req: Request,
+    identifier: string,
+    userData: { id: string },
+    done: Function
+  ) => {
     try {
       const user = req.user as IUser;
       const updatedUser = await User.findOneAndUpdate(
